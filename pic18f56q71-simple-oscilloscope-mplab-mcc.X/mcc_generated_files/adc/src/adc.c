@@ -117,8 +117,8 @@ void ADC_Initialize(void)
     //ADCHS VSS; 
     ADNCH = 0x3B;
 
-    //ADACQL 2; 
-    ADACQL = 0x2;
+    //ADACQL 10; 
+    ADACQL = 0xA;
 
     //ADACQH 0; 
     ADACQH = 0x0;

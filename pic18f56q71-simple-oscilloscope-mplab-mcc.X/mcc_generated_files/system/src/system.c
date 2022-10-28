@@ -48,6 +48,7 @@ void SYSTEM_Initialize(void)
     CLC2_Initialize();
     DAC1_Initialize();
     DMA1_Initialize();
+    DMA2_Initialize();
     FVR_Initialize();
     OPA1_Initialize();
     Timer2_Initialize();

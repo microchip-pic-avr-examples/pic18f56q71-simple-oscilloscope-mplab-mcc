@@ -64,8 +64,8 @@ void Timer4_Initialize(void){
     T4HLT = 0x0;
     // TRSEL T4CKIPPS pin; 
     T4RST = 0x0;
-    // PR 3; 
-    T4PR = 0x3;
+    // PR 1; 
+    T4PR = 0x1;
     // TMR 0x0; 
     T4TMR = 0x0;
 
@@ -76,8 +76,8 @@ void Timer4_Initialize(void){
      PIR10bits.TMR4IF = 0;
     // Enabling TMR4 interrupt.
      PIE10bits.TMR4IE = 1;
-    // TCKPS 1:128; TMRON on; TOUTPS 1:1; 
-    T4CON = 0xF0;
+    // TCKPS 1:32; TMRON on; TOUTPS 1:1; 
+    T4CON = 0xD0;
 }
 
 void Timer4_ModeSet(Timer4_HLT_MODE mode)

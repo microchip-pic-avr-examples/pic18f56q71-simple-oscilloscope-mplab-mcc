@@ -63,8 +63,8 @@ void Timer2_Initialize(void){
     T2HLT = 0x0;
     // TRSEL T2CKIPPS pin; 
     T2RST = 0x0;
-    // PR 187; 
-    T2PR = 0xBB;
+    // PR 249; 
+    T2PR = 0xF9;
     // TMR 0x0; 
     T2TMR = 0x0;
 
@@ -73,8 +73,8 @@ void Timer2_Initialize(void){
 
     // Clearing IF flag.
      PIR3bits.TMR2IF = 0;
-    // TCKPS 1:4; TMRON on; TOUTPS 1:1; 
-    T2CON = 0xA0;
+    // TCKPS 1:8; TMRON on; TOUTPS 1:1; 
+    T2CON = 0xB0;
 }
 
 void Timer2_ModeSet(Timer2_HLT_MODE mode)

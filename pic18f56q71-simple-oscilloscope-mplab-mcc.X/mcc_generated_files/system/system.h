@@ -48,6 +48,7 @@
 #include "../clc/clc2.h"
 #include "../dac/dac1.h"
 #include "../dma/dma1.h"
+#include "../dma/dma2.h"
 #include "../fvr/fvr.h"
 #include "../opa/opa1.h"
 #include "../timer/tmr2.h"

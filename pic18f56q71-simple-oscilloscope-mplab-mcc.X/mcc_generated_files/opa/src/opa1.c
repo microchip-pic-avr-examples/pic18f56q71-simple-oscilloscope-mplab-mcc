@@ -58,8 +58,8 @@ void OPA1_Initialize(void)
     //OREN Disabled; HWCH Basic OPA configuration with user defined feedback; ORPOL Non Inverted; HWCL Basic OPA configuration with user defined feedback; 
     OPA1HWC = 0x0;
 
-    //ORS OPAxORPPS; 
-    OPA1ORS = 0x0;
+    //ORS TMR4_OUT; 
+    OPA1ORS = 0x7;
 
     //EN Enabled; CPON Enabled; UG OPA Output; 
     OPA1CON0 = 0xA8;

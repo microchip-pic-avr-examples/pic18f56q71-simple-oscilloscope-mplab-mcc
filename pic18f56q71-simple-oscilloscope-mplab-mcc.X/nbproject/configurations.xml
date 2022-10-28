@@ -19,6 +19,7 @@
         </logicalFolder>
         <logicalFolder name="dma" displayName="dma" projectFiles="true">
           <itemPath>mcc_generated_files/dma/dma1.h</itemPath>
+          <itemPath>mcc_generated_files/dma/dma2.h</itemPath>
         </logicalFolder>
         <logicalFolder name="fvr" displayName="fvr" projectFiles="true">
           <itemPath>mcc_generated_files/fvr/fvr.h</itemPath>
@@ -77,6 +78,7 @@
         <logicalFolder name="dma" displayName="dma" projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
             <itemPath>mcc_generated_files/dma/src/dma1.c</itemPath>
+            <itemPath>mcc_generated_files/dma/src/dma2.c</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="fvr" displayName="fvr" projectFiles="true">

@@ -64,7 +64,7 @@ int main(void)
 {
     SYSTEM_Initialize();
     
-    Timer4_OverflowCallbackRegister(&Sine_updateWaveform);
+    //Timer4_OverflowCallbackRegister(&Sine_updateWaveform);
     
     //Configure Clipping Detector
     ADC_SetADIInterruptHandler(&LED_updateState);
@@ -79,10 +79,13 @@ int main(void)
     ADC_StartConversionOnChannel(0b10001001);
     
     //Max Priority
-    DMA1_SetDMAPriority(0);
+    DMA1_SetDMAPriority(1);
     
     //Start the DMA
     DMA1_StartTransfer();
+    
+    //Sine Generator
+    DMA2_SetDMAPriority(0);
     
     // Enable the Global High Interrupts 
     INTERRUPT_GlobalInterruptHighEnable(); 
