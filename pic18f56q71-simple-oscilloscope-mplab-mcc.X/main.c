@@ -60,11 +60,17 @@ void Sine_updateWaveform(void)
     index++;
 }
 
+#define TEST_PATTERN_DAC
+
 int main(void)
 {
     SYSTEM_Initialize();
-    
-    //Timer4_OverflowCallbackRegister(&Sine_updateWaveform);
+
+#ifdef TEST_PATTERN_DAC
+    OPA1_SetPositiveChannel(OPA1_posChannel_DAC1);
+#else
+    OPA1_SetPositiveChannel(OPA1_posChannel_OPA1IN);
+#endif
     
     //Configure Clipping Detector
     ADC_SetADIInterruptHandler(&LED_updateState);
