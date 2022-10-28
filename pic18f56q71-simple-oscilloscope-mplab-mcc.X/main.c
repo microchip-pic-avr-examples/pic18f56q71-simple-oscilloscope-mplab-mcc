@@ -32,9 +32,11 @@
 */
 #include "mcc_generated_files/system/system.h"
 
+#include "sine.h"
 #include "oscilloscope.h"
 
 //Implements the clipping detector
+//Note: LED is inverted polarity (LOW = ON, HIGH = OFF)
 void LED_updateState(void)
 {
     if (ADSTATbits.ADUTHR)
@@ -49,12 +51,22 @@ void LED_updateState(void)
     }
 }
 
+void Sine_updateWaveform(void)
+{
+    static uint8_t index = 0;
+    DAC1_SetOutput(sineROM[index]);
+    
+    //256 elements, so index will rollover
+    index++;
+}
+
 int main(void)
 {
     SYSTEM_Initialize();
     
-    DAC1_SetOutput(20);
+    Timer4_OverflowCallbackRegister(&Sine_updateWaveform);
     
+    //Configure Clipping Detector
     ADC_SetADIInterruptHandler(&LED_updateState);
     
     //Enable Continuous Sampling

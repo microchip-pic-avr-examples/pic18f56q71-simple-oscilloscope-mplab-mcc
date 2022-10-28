@@ -36,6 +36,7 @@
         <logicalFolder name="timer" displayName="timer" projectFiles="true">
           <itemPath>mcc_generated_files/timer/timer_interface.h</itemPath>
           <itemPath>mcc_generated_files/timer/tmr2.h</itemPath>
+          <itemPath>mcc_generated_files/timer/tmr4.h</itemPath>
         </logicalFolder>
         <logicalFolder name="uart" displayName="uart" projectFiles="true">
           <itemPath>mcc_generated_files/uart/uart_drv_interface.h</itemPath>
@@ -45,6 +46,7 @@
       </logicalFolder>
       <itemPath>oscilloscope.h</itemPath>
       <itemPath>ringBuffer.h</itemPath>
+      <itemPath>sine.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -99,6 +101,7 @@
         <logicalFolder name="timer" displayName="timer" projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
             <itemPath>mcc_generated_files/timer/src/tmr2.c</itemPath>
+            <itemPath>mcc_generated_files/timer/src/tmr4.c</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="uart" displayName="uart" projectFiles="true">

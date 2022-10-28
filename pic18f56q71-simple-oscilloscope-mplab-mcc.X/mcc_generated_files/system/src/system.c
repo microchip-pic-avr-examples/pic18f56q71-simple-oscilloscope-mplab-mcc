@@ -51,6 +51,7 @@ void SYSTEM_Initialize(void)
     FVR_Initialize();
     OPA1_Initialize();
     Timer2_Initialize();
+    Timer4_Initialize();
     UART2_Initialize();
     INTERRUPT_Initialize();
 }

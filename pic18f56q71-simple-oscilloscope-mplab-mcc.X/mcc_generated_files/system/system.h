@@ -51,6 +51,7 @@
 #include "../fvr/fvr.h"
 #include "../opa/opa1.h"
 #include "../timer/tmr2.h"
+#include "../timer/tmr4.h"
 #include "../uart/uart2.h"
 #include "../system/interrupt.h"
 
