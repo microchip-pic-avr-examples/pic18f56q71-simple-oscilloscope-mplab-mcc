@@ -47,14 +47,14 @@ void DMA2_Initialize(void)
     
     //DMA Instance Selection : 0x1
     DMASELECT = 0x1;
-    //Source Address : 0x1200
-    DMAnSSA = 0x1200;
+    //Source Address : 0x1400
+    DMAnSSA = 0x1400;
     //Destination Address : &DAC1DATL
     DMAnDSA = &DAC1DATL;
     //SSTP not cleared; SMODE decremented; SMR Program Flash; DSTP not cleared; DMODE incremented; 
     DMAnCON1 = 0x4C;
-    //Source Message Size : 512
-    DMAnSSZ = 512;
+    //Source Message Size : 1024
+    DMAnSSZ = 1024;
     //Destination Message Size : 2
     DMAnDSZ = 2;
     //Start Trigger : SIRQ TMR4; 

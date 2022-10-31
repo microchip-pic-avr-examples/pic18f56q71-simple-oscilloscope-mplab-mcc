@@ -35,6 +35,12 @@ void Oscilloscope_changeWaveform(void)
         currentWave++;
     }
     
+    //Triangle fall is an internal state of TRIANGLE
+    if (currentWave == TRIANGLE_FALL)
+    {
+        currentWave = SAWTOOTH;
+    }
+    
     Oscilloscope_setWaveform(currentWave);
 }
 
@@ -194,7 +200,7 @@ void Oscilloscope_updateWaveform(void)
             dacValue++;
             break;
         case SQUARE:
-            if (squareDelay == 20)
+            if (squareDelay == 200)
             {
                 squareDelay = 0;
                 if (dacValue == 0)
