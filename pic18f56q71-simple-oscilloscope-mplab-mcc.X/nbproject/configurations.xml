@@ -24,6 +24,9 @@
         <logicalFolder name="fvr" displayName="fvr" projectFiles="true">
           <itemPath>mcc_generated_files/fvr/fvr.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="nco" displayName="nco" projectFiles="true">
+          <itemPath>mcc_generated_files/nco/nco1.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="opa" displayName="opa" projectFiles="true">
           <itemPath>mcc_generated_files/opa/opa1.h</itemPath>
         </logicalFolder>
@@ -84,6 +87,11 @@
         <logicalFolder name="fvr" displayName="fvr" projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
             <itemPath>mcc_generated_files/fvr/src/fvr.c</itemPath>
+          </logicalFolder>
+        </logicalFolder>
+        <logicalFolder name="nco" displayName="nco" projectFiles="true">
+          <logicalFolder name="src" displayName="src" projectFiles="true">
+            <itemPath>mcc_generated_files/nco/src/nco1.c</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="opa" displayName="opa" projectFiles="true">

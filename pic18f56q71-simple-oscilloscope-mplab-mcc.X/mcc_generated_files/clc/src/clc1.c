@@ -44,8 +44,8 @@ void CLC1_Initialize(void)
     CLCnPOL = 0x0;
     // LCD1S CLCIN0 (CLCIN0PPS); 
     CLCnSEL0 = 0x0;
-    // LCD2S TMR2; 
-    CLCnSEL1 = 0x14;
+    // LCD2S NCO1; 
+    CLCnSEL1 = 0x1F;
     // LCD3S CLCIN0 (CLCIN0PPS); 
     CLCnSEL2 = 0x0;
     // LCD4S CLCIN0 (CLCIN0PPS); 

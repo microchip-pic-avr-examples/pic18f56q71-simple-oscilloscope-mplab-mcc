@@ -50,6 +50,7 @@
 #include "../dma/dma1.h"
 #include "../dma/dma2.h"
 #include "../fvr/fvr.h"
+#include "../nco/nco1.h"
 #include "../opa/opa1.h"
 #include "../timer/tmr2.h"
 #include "../timer/tmr4.h"

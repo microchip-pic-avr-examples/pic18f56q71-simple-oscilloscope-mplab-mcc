@@ -1,13 +1,13 @@
 /**
- * System Driver Source File
+ * NCO1 Generated Driver File
  * 
- * @file system.c
+ * @file nco1.c
  * 
- * @ingroup systemdriver
+ * @ingroup  nco1
  * 
- * @brief This is the generated driver implementation file for the System Driver.
+ * @brief This is the generated driver implementation file for the NCO1 driver.
  *
- * @version Driver Version 1.0.0
+ * @version NCO1 Driver Version 2.0.1
 */
 /*
 © [2022] Microchip Technology Inc. and its subsidiaries.
@@ -30,31 +30,41 @@
     THIS SOFTWARE.
 */
 
- /**
-   Section: Included Files
- */
-#include "../system.h"
 
-/**
-  Section: Driver APIs
-*/
+#include <xc.h>
+#include "../nco1.h"
+#include "../../system/interrupt.h"
 
-void SYSTEM_Initialize(void)
+void NCO1_Initialize(void){
+
+    //NPWS 1_clk; NCKS LFINTOSC; 
+    NCO1CLK = 0x2;
+    //NCOACC 0x0; 
+    NCO1ACCU = 0x0;
+    //NCOACC 0x0; 
+    NCO1ACCH = 0x0;
+    //NCOACC 0x0; 
+    NCO1ACCL = 0x0;
+    //NCOINC 0; 
+    NCO1INCU = 0x0;
+    //NCOINC 33; 
+    NCO1INCH = 0x21;
+    //NCOINC 8; 
+    NCO1INCL = 0x8;
+    //NEN enabled; NPOL active_hi; NPFM PFM_mode; 
+    NCO1CON = 0x81;
+}
+ 
+void __interrupt(irq(NCO1),base(8)) NCO1_ISR()
 {
-    CLOCK_Initialize();
-    PIN_MANAGER_Initialize();
-    ADC_Initialize();
-    CLC1_Initialize();
-    CLC2_Initialize();
-    DAC1_Initialize();
-    DMA1_Initialize();
-    DMA2_Initialize();
-    FVR_Initialize();
-    NCO1_Initialize();
-    OPA1_Initialize();
-    Timer2_Initialize();
-    Timer4_Initialize();
-    UART2_Initialize();
-    INTERRUPT_Initialize();
+   // Clear the NCO interrupt flag
+    PIR6bits.NCO1IF = 0;
 }
 
+bool NCO1_GetOutputStatus(void) 
+{
+	return (NCO1CONbits.OUT);
+}
+/**
+ End of File
+*/

@@ -48,8 +48,8 @@ void CLC2_Initialize(void)
     CLCnSEL0 = 0x0;
     // LCD2S CLC1; 
     CLCnSEL1 = 0x25;
-    // LCD3S TMR2; 
-    CLCnSEL2 = 0x14;
+    // LCD3S NCO1; 
+    CLCnSEL2 = 0x1F;
     // LCD4S CLCIN0 (CLCIN0PPS); 
     CLCnSEL3 = 0x0;
     // LCG1D1N disabled; LCG1D1T disabled; LCG1D2N disabled; LCG1D2T disabled; LCG1D3N disabled; LCG1D3T enabled; LCG1D4N disabled; LCG1D4T disabled; 

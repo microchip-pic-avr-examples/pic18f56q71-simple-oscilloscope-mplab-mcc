@@ -379,13 +379,6 @@ void Timer2_PeriodCountSet(size_t periodVal);
  */
 void Timer2_OverflowCallbackRegister(void (* InterruptHandler)(void));
 
-/**
- * @ingroup tmr2
- * @brief Performs tasks to be executed on timer overflow event.
- * @param none
- * @return none
- */
-void Timer2_Tasks(void);
 
 #endif // TMR2_H
 /**

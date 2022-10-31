@@ -67,16 +67,26 @@ int main(void)
     SYSTEM_Initialize();
 
 #ifdef TEST_PATTERN_DAC
+    
+    //Function Generator Demo Mode
+    //Sine, Triangle, Sawtooth, and Square
+    
     OPA1_SetPositiveChannel(OPA1_posChannel_DAC1);
+    
+    //Change waveforms when someone hits a button
+    CLC2_CLCI_SetInterruptHandler(&Oscilloscope_changeWaveform);
+    
+    //Configures the timer to update the waveform
+    Timer4_OverflowCallbackRegister(&Oscilloscope_updateWaveform);
 #else
     OPA1_SetPositiveChannel(OPA1_posChannel_OPA1IN);
+    
+    //Switch the gain when the user presses a button
+    CLC2_CLCI_SetInterruptHandler(&Oscilloscope_incrementGain);
 #endif
     
     //Configure Clipping Detector
     ADC_SetADIInterruptHandler(&LED_updateState);
-    
-    //Enable Continuous Sampling
-    ADC_EnableContinuousConversion();
     
     //Set upper threshold (90% of max)
     ADC_SetUpperThreshold(0xE66);
@@ -84,7 +94,7 @@ int main(void)
     //Start ADC Conversion on the output of OPAMP when sampling OPA1IN3+
     ADC_StartConversionOnChannel(0b10001001);
     
-    //Max Priority
+    //Assign UART TX Priority
     DMA1_SetDMAPriority(1);
     
     //Start the DMA
@@ -98,10 +108,7 @@ int main(void)
 
     // Enable the Global Low Interrupts 
     INTERRUPT_GlobalInterruptLowEnable(); 
-    
-    //Switch the gain when the user presses a button
-    CLC2_CLCI_SetInterruptHandler(&Oscilloscope_incrementGain);
-    
+        
     while(1)
     {
         

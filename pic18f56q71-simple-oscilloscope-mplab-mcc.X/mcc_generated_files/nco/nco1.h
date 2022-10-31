@@ -1,13 +1,13 @@
 /**
- * System Driver Source File
+ * NCO1 Generated Driver API Header File
  * 
- * @file system.c
+ * @file nco1.h
  * 
- * @ingroup systemdriver
+ * @defgroup  nco1 NCO1
  * 
- * @brief This is the generated driver implementation file for the System Driver.
+ * @brief This is the generated header file for the NCO1 driver.
  *
- * @version Driver Version 1.0.0
+ * @version NCO1 Driver Version 2.0.1
 */
 /*
 © [2022] Microchip Technology Inc. and its subsidiaries.
@@ -30,31 +30,49 @@
     THIS SOFTWARE.
 */
 
- /**
-   Section: Included Files
- */
-#include "../system.h"
+
+#ifndef NCO1_H
+#define NCO1_H
+
+#include <xc.h>
+#include <stdbool.h>
+#include <stdint.h>
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+
+    extern "C" {
+
+#endif
 
 /**
-  Section: Driver APIs
+ * @ingroup nco1
+ * @brief  This routine initializes the NCO1_Initialize. Initializes the NCO1_Initialize
+ * @param none
+ * @return none
+ * 
+ */
+void NCO1_Initialize(void);
+
+;
+
+/**
+ * @ingroup nco1
+ * @brief This routine returns the NCO1 output status.
+ * @pre NCO1_Initialize() function should have been called before calling this function.
+ * @param none
+ * @retval 1 - Indicates output is high.
+ * @retval 0 - Indicates output is low.
+ * 
+ */
+bool NCO1_GetOutputStatus(void);
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+
+    }
+
+#endif
+
+#endif  //NCO1_H
+/**
+ End of File
 */
-
-void SYSTEM_Initialize(void)
-{
-    CLOCK_Initialize();
-    PIN_MANAGER_Initialize();
-    ADC_Initialize();
-    CLC1_Initialize();
-    CLC2_Initialize();
-    DAC1_Initialize();
-    DMA1_Initialize();
-    DMA2_Initialize();
-    FVR_Initialize();
-    NCO1_Initialize();
-    OPA1_Initialize();
-    Timer2_Initialize();
-    Timer4_Initialize();
-    UART2_Initialize();
-    INTERRUPT_Initialize();
-}
-

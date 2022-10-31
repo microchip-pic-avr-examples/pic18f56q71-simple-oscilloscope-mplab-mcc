@@ -45,8 +45,8 @@ static void ADC_DefaultADI_ISR(void);
 
 void ADC_Initialize(void)
 {
-    //ADACT disabled; 
-    ADACT = 0x0;
+    //ADACT TMR2; 
+    ADACT = 0x4;
 
     //ADCCS FOSC/2; 
     ADCLK = 0x0;
@@ -132,8 +132,8 @@ void ADC_Initialize(void)
     //ADPREH 0; 
     ADPREH = 0x0;
     
-    //GO_nDONE undefined; IC single ended mode; ADFM left justified, two's compliment; ADCS FOSC; CSEN disabled; ADCONT enabled; ADON disabled; 
-    ADCON0 = 0x40;
+    //GO_nDONE undefined; IC single ended mode; ADFM left justified, two's compliment; ADCS FOSC; CSEN disabled; ADCONT disabled; ADON disabled; 
+    ADCON0 = 0x0;
 
     //ADDSEN disabled; PCSC sampling capacitor and external I/O pin; ADGPOL digital_low; ADIPEN disabled; ADPPOL Vss; 
     ADCON1 = 0x0;
