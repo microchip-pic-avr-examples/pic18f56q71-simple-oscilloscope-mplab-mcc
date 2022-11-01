@@ -6,20 +6,20 @@
 
 In this code example, the PIC18F56Q71 microcontroller will be used to implement a simple oscilloscope with the Operational Amplifier (OPAMP), Analog-to-Digital Converter with Computation and Context (ADCCC), Direct Memory Access (DMA), and USART peripherals. An AWG was also implemented for demo mode using the 10-bit DAC and other peripherals on the device.
 
-## Related Documentation
+## Related Examples
 
 - [Analog Serial Read for PIC18F16Q41](https://github.com/microchip-pic-avr-examples/pic18f16q41-analog-serial-read-mplab-mcc)
 
 ## Software Used
 
-- [MPLAB® X IDE 6.0.0 or newer](#)
-- [MPLAB XC8 2.40.0 or newer compiler](#)
-- [MPLAB Code Configurator](#)
+- [MPLAB® X IDE 6.0.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q71&utm_content=pic18f56q71-simple-oscilloscope-github)
+- [MPLAB XC8 2.40.0 or newer compiler](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q71&utm_content=pic18f56q71-simple-oscilloscope-github)
+- [MPLAB Code Configurator](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q71&utm_content=pic18f56q71-simple-oscilloscope-github)
 - PIC18F-Q_DFP v1.14.237
 
 ## Hardware Used
 
-- [PIC18F56Q71 Curiosity Nano](#)
+- PIC18F56Q71 Curiosity Nano
 
 ## Warning
 
@@ -118,7 +118,7 @@ DAC1's value is set in two ways. When in SINE mode, DAC1 is automatically set to
 
 To change gain or waveform (depending on the mode), the pushbutton on the Curiosity Nano is debounced in hardware, as shown below.
 
-[Image](#)
+![Debounce Diagram](./images/debounceDiagram.png)
 
 CLC1 is synchronizes the input signal to the NCO's low frequency output. Then, CLC2 loads the logical-AND of that synchronized value and the raw input. If both are "1", then "1" is loaded into CLC2's flip-flop.
 
