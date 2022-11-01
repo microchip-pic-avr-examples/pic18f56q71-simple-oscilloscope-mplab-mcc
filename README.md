@@ -41,6 +41,13 @@ In this code example, the PIC18F56Q71 microcontroller will be used to implement 
 | RB5 | UART RX (unused, reserved)
 | RC7 | Clipping Warning (LED0)
 
+### UART Configuration
+
+* Baud Rate: 115,200 
+* Data bits: 8 bits 
+* Parity: None
+* Stop Bits: 1 bit
+
 ### Easy Setup
 
 1. Connect the Curiosity Nano to your computer with a USB cable
