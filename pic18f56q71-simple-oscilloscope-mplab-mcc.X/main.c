@@ -51,15 +51,6 @@ void LED_updateState(void)
     }
 }
 
-void Sine_updateWaveform(void)
-{
-    static uint8_t index = 0;
-    DAC1_SetOutput(sineROM[index]);
-    
-    //256 elements, so index will rollover
-    index++;
-}
-
 //If defined, the system is in demo mode
 #define OSCILLOSCOPE_DEMO_MODE
 

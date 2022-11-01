@@ -19,12 +19,12 @@
             }
         ],
         "dfp": {
-            "name": "",
-            "semverRange": ""
+            "name": "PIC18F-Q_DFP",
+            "semverRange": "^1.14.237"
         },
         "configurator": {
-            "name": "",
-            "semverRange": ""
+            "name": "MCC",
+            "semverRange": ">=5.1.16"
         },
         "device": {
             "metaDataVersion": "1.0.0",
@@ -37,8 +37,12 @@
             }
         },
         "author": "Robert Perkel",
-        "peripherals": [],
-        "keywords": [],
+        "peripherals": [
+            "ADCCC", "NCO", "CLC", "OPAMP", "TMR", "DAC", "DMA"
+        ],
+        "keywords": [
+            "Analog"
+        ],
         "additionalData": {
             "longDescription": {
                 "metaDataVersion": "1.0.0",

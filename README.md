@@ -88,6 +88,8 @@ In this code example, the PIC18F56Q71 microcontroller will be used to implement 
 
 ## Theory of Operation
 
+![Block Diagram](./images/blockDiagram.png)
+
 ### Basic Oscilloscope
 
 Fundementally, the core of an oscilloscope is a fast ADC that sends data to a co-processor, which displays or the stores the data for the user. To keep signals clean at high sampling rates, oscilloscopes contain an Analog Front End (AFE) which filters, attunates and/or amplifies the input signal before it reaches the ADC.
