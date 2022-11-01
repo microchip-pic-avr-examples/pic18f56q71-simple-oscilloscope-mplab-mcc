@@ -4,8 +4,8 @@
     "content": {
         "metaDataVersion": "1.3.0",
         "name": "com.microchip.mcu8.mplabx.project.pic18f56q71-simple-oscilloscope-mplab-mcc",
-        "version": " ",
-        "displayName": "",
+        "version": "1.0.0",
+        "displayName": "Simple Oscilloscope with PIC18F56Q71",
         "projectName": "pic18f56q71-simple-oscilloscope-mplab-mcc",
         "shortDescription": "Create a simple oscilloscope with a PIC18F56Q71 curiosity evaluation board",
         "ide": {
