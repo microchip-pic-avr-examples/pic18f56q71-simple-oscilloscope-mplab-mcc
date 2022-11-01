@@ -60,13 +60,14 @@ void Sine_updateWaveform(void)
     index++;
 }
 
-#define TEST_PATTERN_DAC
+//If defined, the system is in demo mode
+#define OSCILLOSCOPE_DEMO_MODE
 
 int main(void)
 {
     SYSTEM_Initialize();
 
-#ifdef TEST_PATTERN_DAC
+#ifdef OSCILLOSCOPE_DEMO_MODE
     
     //Function Generator Demo Mode
     //Sine, Triangle, Sawtooth, and Square

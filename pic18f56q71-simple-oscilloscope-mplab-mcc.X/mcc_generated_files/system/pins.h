@@ -89,6 +89,26 @@
 #define IO_RA1_SetAnalogMode()      do { ANSELAbits.ANSELA1 = 1; } while(0)
 #define IO_RA1_SetDigitalMode()     do { ANSELAbits.ANSELA1 = 0; } while(0)
    
+// get/set RB1 aliases
+#define RB1_IN3_TRIS                 TRISBbits.TRISB1
+#define RB1_IN3_LAT                  LATBbits.LATB1
+#define RB1_IN3_PORT                 PORTBbits.RB1
+#define RB1_IN3_WPU                  WPUBbits.WPUB1
+#define RB1_IN3_OD                   ODCONBbits.ODCB1
+#define RB1_IN3_ANS                  ANSELBbits.ANSELB1
+#define RB1_IN3_SetHigh()            do { LATBbits.LATB1 = 1; } while(0)
+#define RB1_IN3_SetLow()             do { LATBbits.LATB1 = 0; } while(0)
+#define RB1_IN3_Toggle()             do { LATBbits.LATB1 = ~LATBbits.LATB1; } while(0)
+#define RB1_IN3_GetValue()           PORTBbits.RB1
+#define RB1_IN3_SetDigitalInput()    do { TRISBbits.TRISB1 = 1; } while(0)
+#define RB1_IN3_SetDigitalOutput()   do { TRISBbits.TRISB1 = 0; } while(0)
+#define RB1_IN3_SetPullup()          do { WPUBbits.WPUB1 = 1; } while(0)
+#define RB1_IN3_ResetPullup()        do { WPUBbits.WPUB1 = 0; } while(0)
+#define RB1_IN3_SetPushPull()        do { ODCONBbits.ODCB1 = 0; } while(0)
+#define RB1_IN3_SetOpenDrain()       do { ODCONBbits.ODCB1 = 1; } while(0)
+#define RB1_IN3_SetAnalogMode()      do { ANSELBbits.ANSELB1 = 1; } while(0)
+#define RB1_IN3_SetDigitalMode()     do { ANSELBbits.ANSELB1 = 0; } while(0)
+   
 // get/set RB3 aliases
 #define IO_RB3_TRIS                 TRISBbits.TRISB3
 #define IO_RB3_LAT                  LATBbits.LATB3
