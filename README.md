@@ -35,11 +35,11 @@ In this code example, the PIC18F56Q71 microcontroller will be used to implement 
 
 | Pin | Function
 | --- | ---------
-| RA0 | SW0
+| RA0 | Pushbutton (SW0)
 | RB1 | Analog Input (non-demo mode)
 | RB4 | UART TX
 | RB5 | UART RX (unused, reserved)
-| RC7 | LED0
+| RC7 | Clipping Warning (LED0)
 
 ### Easy Setup
 
@@ -98,7 +98,7 @@ This example follows a similiar logic to the full benchtop equipment, but at a s
 
 Note: For simplicity, this demo only implements the gains 1x, 2x, 4x, 8x and 16x. When 16x is reached, the gain is reset to 1x. 
 
-Bandwidth in this example is limited by the speed of data transmission. To send a single result of data, it takes 10 bits of data; 8 data bits, no parity, 1 stop bit, and 1 start bit. At 115,200 baud, this equates to 11,520 samples per second. Due to the Nyquist-Shannon sampling theorem, the maximum frequency of a waveform that can be displayed is half the number of samples collected (e.g.: 2 points per sample). This works out to an analog bandwidth of 5.76 kHz.
+Bandwidth in this example is limited by the speed of data transmission. To send a single result of data, it takes 10 bits of data; 8 data bits, no parity, 1 stop bit, and 1 start bit. At 115,200 baud, this equates to 11,520 samples per second. Due to the Nyquist-Shannon sampling theorem, the maximum frequency of a waveform that can be displayed is half the number of samples collected (e.g.: 2 points per sample). This works out to an analog bandwidth of 5.76 kHz. (Although, it is strongly recommended to run much below this to reduce signal distrotion on the display.)
 
 To send data as fast as possible, a channel of DMA is used to grab the last result from the ADCCC and load it automatically into the USART transmit buffer to go to the user's computer for display. To maximize bandwidth, only the 8 MSBs are sent, with the 4 LSBs from the result being discarded. 
 
