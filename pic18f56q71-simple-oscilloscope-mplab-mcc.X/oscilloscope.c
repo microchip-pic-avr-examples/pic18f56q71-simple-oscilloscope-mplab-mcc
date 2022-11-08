@@ -9,6 +9,15 @@ static volatile OSCILLOSCOPE_WAVEFORM currentWave = SINE;
 static volatile uint16_t dacValue = 0x0000;
 static volatile uint8_t squareDelay = 0x00;
 
+//Value that exceeds the DAC Limit
+#define DAC_10B_LIMIT 1024
+
+//Value to switch the triangle values at
+#define DAC_MAX_VALUE 1023
+
+//Delay for the square wave generator
+#define DAC_SQUARE_DELAY 200
+
 //Increments the gain of the OPAMP (1 -> 2 -> 4 -> 8 -> 16 -> 1...)
 void Oscilloscope_incrementGain(void)
 {
@@ -71,7 +80,7 @@ void Oscilloscope_setGain(OSCILLOSCOPE_GAIN gain)
             //2x
             
             //Configure Resistor Ladder
-            OPA1CON1 = 0b0111111;
+            OPA1CON1 = 0x3F;
             
             //NCH = Resistor Ladder (GSEL)
             OPA1CON2bits.NCH = 0b001;
@@ -88,7 +97,7 @@ void Oscilloscope_setGain(OSCILLOSCOPE_GAIN gain)
             //4x
             
             //Configure Resistor Ladder
-            OPA1CON1 = 0b1011111;
+            OPA1CON1 = 0x5F;
             
             //NCH = Resistor Ladder (GSEL)
             OPA1CON2bits.NCH = 0b001;
@@ -105,7 +114,7 @@ void Oscilloscope_setGain(OSCILLOSCOPE_GAIN gain)
             //8x
             
             //Configure Resistor Ladder
-            OPA1CON1 = 0b1101111;
+            OPA1CON1 = 0x6F;
             
             //NCH = Resistor Ladder (GSEL)
             OPA1CON2bits.NCH = 0b001;
@@ -123,7 +132,7 @@ void Oscilloscope_setGain(OSCILLOSCOPE_GAIN gain)
             //16x
             
             //Configure Resistor Ladder
-            OPA1CON1 = 0b1111111;
+            OPA1CON1 = 0x7F;
             
             //NCH = Resistor Ladder (GSEL)
             OPA1CON2bits.NCH = 0b001;
@@ -171,7 +180,7 @@ void Oscilloscope_updateWaveform(void)
             break;
         case TRIANGLE_RISE:
         {
-            if (dacValue == 1023)
+            if (dacValue == DAC_MAX_VALUE)
             {
                 currentWave = TRIANGLE_FALL;
                 dacValue--;
@@ -200,12 +209,12 @@ void Oscilloscope_updateWaveform(void)
             dacValue++;
             break;
         case SQUARE:
-            if (squareDelay == 200)
+            if (squareDelay == DAC_SQUARE_DELAY)
             {
                 squareDelay = 0;
                 if (dacValue == 0)
                 {
-                    dacValue = 1023;
+                    dacValue = DAC_MAX_VALUE;
                 }
                 else
                 {
@@ -221,7 +230,7 @@ void Oscilloscope_updateWaveform(void)
             dacValue = 0;
     }
     
-    if (dacValue == 1024)
+    if (dacValue == DAC_10B_LIMIT)
     {
         dacValue = 0;
     }

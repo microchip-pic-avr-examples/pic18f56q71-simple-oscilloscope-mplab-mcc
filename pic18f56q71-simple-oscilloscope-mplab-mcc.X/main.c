@@ -54,6 +54,12 @@ void LED_updateState(void)
 //If defined, the system is in demo mode
 #define OSCILLOSCOPE_DEMO_MODE
 
+//ADC input channel to sample RB1 (OPA1IN3+)
+#define OPAMP_INPUT_SAMPLE 0b10001001
+
+//Threshold for clipping warning
+#define ADC_THRESHOLD_LEVEL 0xE66
+
 int main(void)
 {
     SYSTEM_Initialize();
@@ -81,10 +87,10 @@ int main(void)
     ADC_SetADIInterruptHandler(&LED_updateState);
     
     //Set upper threshold (90% of max)
-    ADC_SetUpperThreshold(0xE66);
+    ADC_SetUpperThreshold(ADC_THRESHOLD_LEVEL);
     
     //Start ADC Conversion on the output of OPAMP when sampling OPA1IN3+
-    ADC_StartConversionOnChannel(0b10001001);
+    ADC_StartConversionOnChannel(OPAMP_INPUT_SAMPLE);
     
     //Assign UART TX Priority
     DMA1_SetDMAPriority(1);

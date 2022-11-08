@@ -4,7 +4,7 @@
 
 # Simple Oscilloscope with PIC18F56Q71
 
-In this code example, the PIC18F56Q71 microcontroller will be used to implement a simple oscilloscope with the Operational Amplifier (OPAMP), Analog-to-Digital Converter with Computation and Context (ADCCC), Direct Memory Access (DMA), and USART peripherals. An AWG was also implemented for demo mode using the 10-bit DAC and other peripherals on the device.
+In this code example, the PIC18F56Q71 microcontroller will be used to implement a simple oscilloscope with the Operational Amplifier (OPAMP), Analog-to-Digital Converter with Computation and Context (ADCCC), Direct Memory Access (DMA), and UART peripherals. An Arbitary Waveform Generator (AWG) was also implemented for demo mode using the 10-bit Digital-to-Analog Converter (DAC) and other peripherals on the device.
 
 ## Related Examples
 
@@ -33,6 +33,8 @@ In this code example, the PIC18F56Q71 microcontroller will be used to implement 
 
 **Important: Wait until the board is powered BEFORE applying input signals.**
 
+All signals (excl. analog input) are connected on the Curosity Nano without modifications.
+
 | Pin | Function
 | --- | ---------
 | RA0 | Pushbutton (SW0)
@@ -43,7 +45,7 @@ In this code example, the PIC18F56Q71 microcontroller will be used to implement 
 
 ### UART Configuration
 
-* Baud Rate: 115,200 
+* Baud Rate: 115200 
 * Data bits: 8 bits 
 * Parity: None
 * Stop Bits: 1 bit
@@ -99,15 +101,15 @@ In this code example, the PIC18F56Q71 microcontroller will be used to implement 
 
 ### Basic Oscilloscope
 
-Fundementally, the core of an oscilloscope is a fast ADC that sends data to a co-processor, which displays or the stores the data for the user. To keep signals clean at high sampling rates, oscilloscopes contain an Analog Front End (AFE) which filters, attunates and/or amplifies the input signal before it reaches the ADC.
+Fundementally, the core of an oscilloscope is a fast ADC that sends data to a co-processor, which displays or stores the data for the user. To keep signals clean at high sampling rates, oscilloscopes contain an Analog Front End (AFE) which filters, attenuates and/or amplifies the input signal before it reaches the ADC.
 
-This example follows a similiar logic to the full benchtop equipment, but at a slower speed. The AFE in this example is one of the OPAMPs on the microcontroller. An internal resistor ladder is built-in to set the gain of the OPAMP without any external components. The gain be changed at runtime to enable a wider dynamic input range that is possible with just a single gain.
+This example follows a similiar logic to the full benchtop equipment, but at a slower speed. The AFE in this example is one of the OPAMPs on the microcontroller. An internal resistor ladder is built-in to set the gain of the OPAMP without any external components. The gain can be changed at runtime to enable a wider dynamic input range than is achievable with a fixed gain.
 
-Note: For simplicity, this demo only implements the gains 1x, 2x, 4x, 8x and 16x. When 16x is reached, the gain is reset to 1x. 
+Note: For simplicity, this demo only implements gains of 1x, 2x, 4x, 8x and 16x. Once 16x is reached, the gain is looped back to 1x. 
 
-Bandwidth in this example is limited by the speed of data transmission. To send a single result of data, it takes 10 bits of data; 8 data bits, no parity, 1 stop bit, and 1 start bit. At 115,200 baud, this equates to 11,520 samples per second. Due to the Nyquist-Shannon sampling theorem, the maximum frequency of a waveform that can be displayed is half the number of samples collected (e.g.: 2 points per sample). This works out to an analog bandwidth of 5.76 kHz. (Although, it is strongly recommended to run much below this to reduce signal distrotion on the display.)
+The bandwidth in this example is limited by the speed of data transmission. To send a single result of data, it takes 10 bits of data; 8 data bits, no parity, 1 stop bit, and 1 start bit. At 115,200 baud, this equates to 11,520 samples per second. Due to the Nyquist-Shannon sampling theorem, the maximum frequency of a waveform that can be displayed is half the number of samples collected (e.g.: 2 points per sample). This works out to an analog bandwidth of 5.76 kHz. (Although, it is strongly recommended to run much below this to reduce signal distrotion on the display.)
 
-To send data as fast as possible, a channel of DMA is used to grab the last result from the ADCCC and load it automatically into the USART transmit buffer to go to the user's computer for display. To maximize bandwidth, only the 8 MSBs are sent, with the 4 LSBs from the result being discarded. 
+To send data as fast as possible, a channel of DMA is used to grab the last result from the ADCCC and to load it automatically into the UART transmit buffer to go to the user's computer for display. To maximize bandwidth, only the 8 MSBs are sent, with the 4 LSBs from the result being discarded. 
 
 ### Clipping Detector
 
