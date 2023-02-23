@@ -1,16 +1,16 @@
 /**
- * CLC1 Generated Driver API Header File
+ * CLC1 Generated Driver API Header File.
  * 
  * @file clc1.h
  * 
  * @defgroup  clc1 CLC1
  * 
- * @brief This is the generated header file for the CLC1 driver.
+ * @brief This file contains the API prototypes for the CLC1 driver.
  *
  * @version CLC1 Driver Version 1.0.1
 */
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -40,8 +40,8 @@
 /**
  * @ingroup clc1
  * @brief  Initializes the CLC1. This routine configures the CLC1 specific control registers.
- * @param none
- * @return none
+ * @param None.
+ * @return None.
  * 
  */
 void CLC1_Initialize(void);
@@ -49,10 +49,10 @@ void CLC1_Initialize(void);
 
 /**
  * @ingroup clc1
- * @brief This routine returns output pin status of the CLC module.
- * @param  none
- * @retval true - if pin Status is true.
- * @retval false - if pin Status is false.
+ * @brief Returns the output pin status of the CLC module.
+ * @param  None.
+ * @retval True - Output is 1.
+ * @retval False - Output is 0.
  */
 bool CLC1_OutputStatusGet(void);
 

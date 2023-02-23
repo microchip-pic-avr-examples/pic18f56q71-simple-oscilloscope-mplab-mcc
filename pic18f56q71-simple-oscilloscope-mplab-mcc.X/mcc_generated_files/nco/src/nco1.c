@@ -1,16 +1,16 @@
 /**
- * NCO1 Generated Driver File
+ * NCO1 Generated Driver File.
  * 
  * @file nco1.c
  * 
  * @ingroup  nco1
  * 
- * @brief This is the generated driver implementation file for the NCO1 driver.
+ * @brief This file contains the API implementation for the NCO1 driver.
  *
  * @version NCO1 Driver Version 2.0.1
 */
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 

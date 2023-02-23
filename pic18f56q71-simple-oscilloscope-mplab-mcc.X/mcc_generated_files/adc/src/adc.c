@@ -7,10 +7,10 @@
  * 
  * @brief This is the generated driver implementation file for the ADC driver.
  *
- * @version ADC Driver Version 1.0.0
+ * @version ADC Driver Version 1.0.1
 */
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -45,6 +45,9 @@ static void ADC_DefaultADI_ISR(void);
 
 void ADC_Initialize(void)
 {
+    //GO_nDONE undefined; IC single ended mode; ADFM left justified; ADCS ADCRC; CSEN disabled; ADCONT disabled; ADON disabled; 
+    ADCON0 = 0x10;
+
     //ADACT TMR2; 
     ADACT = 0x4;
 
@@ -72,17 +75,17 @@ void ADC_Initialize(void)
     //CTX 0; CTXSW user content; 
     ADCTX = 0x0;
 
-    //ADLTHL 162; 
-    ADLTHL = 0xA2;
+    //ADLTHL 116; 
+    ADLTHL = 0x74;
 
-    //ADLTHH 11; 
-    ADLTHH = 0xB;
+    //ADLTHH 1; 
+    ADLTHH = 0x1;
 
-    //ADUTHL 92; 
-    ADUTHL = 0x5C;
+    //ADUTHL 138; 
+    ADUTHL = 0x8A;
 
-    //ADUTHH 116; 
-    ADUTHH = 0x74;
+    //ADUTHH 14; 
+    ADUTHH = 0xE;
 
     //ADSTPTL 0; 
     ADSTPTL = 0x0;
@@ -132,8 +135,8 @@ void ADC_Initialize(void)
     //ADPREH 0; 
     ADPREH = 0x0;
     
-    //GO_nDONE undefined; IC single ended mode; ADFM left justified, two's compliment; ADCS FOSC; CSEN disabled; ADCONT disabled; ADON disabled; 
-    ADCON0 = 0x0;
+    //Disable continuous operation
+    ADCON0bits.ADCONT = 0;
 
     //ADDSEN disabled; PCSC sampling capacitor and external I/O pin; ADGPOL digital_low; ADIPEN disabled; ADPPOL Vss; 
     ADCON1 = 0x0;
@@ -160,20 +163,20 @@ void ADC_Initialize(void)
     // Enabling ADC interrupt
     PIE1bits.ADIE = 1;
 
-    // Clear ADC Context-1 Threshold Interrupt Flag
+    //Clear ADC Context-1 Threshold Interrupt Flag
     PIR1bits.ADCH1IF = 0;
 
-    // Clear ADC Context-2 Threshold Interrupt Flag
+    //Clear ADC Context-2 Threshold Interrupt Flag
     PIR1bits.ADCH2IF = 0;
 
-    // Clear ADC Context-3 Threshold Interrupt Flag
+    //Clear ADC Context-3 Threshold Interrupt Flag
     PIR1bits.ADCH3IF = 0;
 
-    // Clear ADC Context-4 Threshold Interrupt Flag
+    //Clear ADC Context-4 Threshold Interrupt Flag
     PIR1bits.ADCH4IF = 0;
 
-    //GO_nDONE undefined; IC single ended mode; ADFM left justified; ADCS ADCRC; CSEN disabled; ADCONT disabled; ADON enabled; 
-    ADCON0 = 0x90;
+    //Enable ADC
+    ADCON0bits.ADON = 1;
 }
 
 inline void ADC_SelectContext(adc_context_t context)

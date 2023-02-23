@@ -1,16 +1,16 @@
 /**
- * CLC2 Generated Driver File
+ * CLC2 Generated Driver File.
  * 
  * @file clc2.c
  * 
  * @ingroup  clc2
  * 
- * @brief This is the generated driver implementation file for the CLC2 driver.
+ * @brief This file contains the API implementations for the CLC2 driver.
  *
  * @version CLC2 Driver Version 1.0.1
 */
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -92,7 +92,7 @@ void CLC2_CLCI_SetInterruptHandler(void (* InterruptHandler)(void))
 static void CLC2_DefaultCLCI_ISR(void)
 {
     //Add your interrupt code here or
-    //Use CLC2_CLCI_SetInterruptHandler() function to use Custom ISR
+    //Use CLC2_CLCI_SetInterruptHandler() function to use custom ISR
 }
 
 bool CLC2_OutputStatusGet(void)

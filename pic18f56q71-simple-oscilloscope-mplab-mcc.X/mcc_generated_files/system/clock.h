@@ -5,14 +5,14 @@
  * 
  * @defgroup clockdriver Clock Driver
  * 
- * @brief This is the generated header file for the Clock driver.
+ * @brief This file contains the API prototypes and other data types for the Clock driver.
  *
- * @version Driver Version 2.0.2
+ * @version Driver Version 2.0.3
  *
 */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -41,9 +41,9 @@
 
 /**
  * @ingroup clockdriver
- * @brief Initializes all the INTERNAL OSCILLATOR sources and clock switch configurations. 
- * @param None
- * @return None  
+ * @brief Initializes all the Internal Oscillator sources and the clock switch configurations. 
+ * @param None.
+ * @return None.
  */
 void CLOCK_Initialize(void);
 

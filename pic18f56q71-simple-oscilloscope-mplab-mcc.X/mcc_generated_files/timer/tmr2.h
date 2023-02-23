@@ -5,14 +5,14 @@
  *  
  * @defgroup tmr2 TMR2
  *
- * @brief API Prototypes and other data types for the TMR2 module.
+ * @brief This file contains the API Prototypes and other data types for the TMR2 driver.
  *
  * @version TMR2 Driver Version 3.0.1
  */
  
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -45,14 +45,14 @@
 /**
  @ingroup tmr2
  @struct TMR_INTERFACE
- @brief This is an instance of TMR_INTERFACE for TMR2 module
+ @brief This is an instance of TMR_INTERFACE for TMR2 module.
  */
 extern const struct TMR_INTERFACE Timer2;
 
 /**
  * @ingroup tmr2
  * @enum Timer2_HLT_EXT_RESET_SOURCE
- * @brief Defines the several modes of operation of the Timer with HLT extension.
+ * @brief Defines the several modes of operation of the timer with the HLT extension.
  */
 
 typedef enum
@@ -302,80 +302,80 @@ typedef enum
 
 /**
  * @ingroup tmr2
- * @brief Initializes the TMR2 module. This routine must be called before any other TMR2 routines.
- * @param none
- * @return none
+ * @brief Initializes the TMR2 module. This routine must be called before any other timer routines.
+ * @param None.
+ * @return None.
  */
  void Timer2_Initialize(void);
 
 /**
  * @ingroup tmr2
- * @brief Configures the Hardware Limit Timer mode.
- * @pre TMR2 should be initialized with Timer2_Initialize after calling this API.
+ * @brief Configures the Hardware Limit Timer (HLT) mode.
+ * @pre The TMR2 should be initialized with Timer2_Initialize after calling this API.
  * @param mode - Value to write into T2HLTbits.MODE bits.
- * @return none
+ * @return None.
  */
 void Timer2_ModeSet(Timer2_HLT_MODE mode);
 
 /**
  * @ingroup tmr2
  * @brief Configures the HLT external reset source.
- * @pre TMR2 should be initialized with Timer2_Initialize after calling this API.
+ * @pre The TMR2 should be initialized with Timer2_Initialize after calling this API.
  * @param reset - Value to write into T2RSTbits.RSEL bits.
- * @return none
+ * @return None.
  */
 void Timer2_ExtResetSourceSet(Timer2_HLT_EXT_RESET_SOURCE reset);
 
 /**
  * @ingroup tmr2
  * @brief Starts TMR2.
- * @pre TMR2 should be initialized with Timer2_Initialize() before calling this API.
- * @param none
- * @return none
+ * @pre The TMR2 should be initialized with Timer2_Initialize() before calling this API.
+ * @param None.
+ * @return None.
  */
 void Timer2_Start(void);
 
 /**
  * @ingroup tmr2
  * @brief Stops TMR2.
- * @pre TMR2 should be initialized with Timer2_Initialize() before calling this API.
- * @param none
- * @return none
+ * @pre The TMR2 should be initialized with Timer2_Initialize() before calling this API.
+ * @param None.
+ * @return None.
  */
 void Timer2_Stop(void);
 
 /**
  * @ingroup tmr2
- * @brief Reads the 8 bits from TMR2 register.
- * @pre TMR2 should be initialized with Timer2_Initialize() before calling this API.
- * @param none.
- * @return 8-bit data from TMR2 register.
+ * @brief Reads the 8-bit from the TMR2 register.
+ * @pre The TMR2 should be initialized with Timer2_Initialize() before calling this API.
+ * @param None.
+ * @return 8-bit data from the TMR2 register.
  */
 uint8_t Timer2_Read(void);
 
 /**
  * @ingroup tmr2
- * @brief Writes 8-bit value to TMR2 register.
- * @pre TMR2 should be initialized with Timer2_Initialize() before calling this API.
- * @param 8-bit value to be written to TMR2 register.
- * @return none
+ * @brief Writes the 8-bit value to the TMR2 register.
+ * @pre The TMR2 should be initialized with Timer2_Initialize() before calling this API.
+ * @param timerVal - 8-bit value written to the TMR2 register.
+ * @return None.
  */
 void Timer2_Write(uint8_t timerVal);
 
 /**
  * @ingroup tmr2
- * @brief Loads 8-bit value to PR2H register.
- * @pre TMR2 should be initialized with Timer2_Initialize() before calling this API.
- * @param 8-bit value to be written to PR2 register.
- * @return none
+ * @brief Loads the 8-bit value to the PR2 register.
+ * @pre The TMR2 should be initialized with Timer2_Initialize() before calling this API.
+ * @param periodVal - 8-bit value written to the PR2 register.
+ * @return None.
  */
 void Timer2_PeriodCountSet(size_t periodVal);
 
 /**
  * @ingroup tmr2
- * @brief Setter function for TMR2 overflow Callback.
- * @param CallbackHandler - Pointer to custom Callback.
- * @return none
+ * @brief Setter function for the TMR2 overflow callback.
+ * @param CallbackHandler - Pointer to the custom callback.
+ * @return None.
  */
 void Timer2_OverflowCallbackRegister(void (* InterruptHandler)(void));
 

@@ -5,12 +5,12 @@
  * 
  * @defgroup systemdriver System Driver
  * 
- * @brief This is the generated header file for the System Driver.
+ * @brief This is the generated header file for the System driver.
  *
- * @version Driver Version 1.0.0
+ * @version Driver Version 1.0.1
 */
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -33,13 +33,9 @@
 #ifndef SYSTEM_H
 #define	SYSTEM_H
 
-/**
-  Section: Included Files
-*/
 #include <xc.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include <conio.h>
 #include "config_bits.h"
 #include "../system/clock.h"
 #include "../system/pins.h"
@@ -59,10 +55,10 @@
 
 /**
  * @ingroup systemdriver
- * @brief This initializes the system module and must be called before any other API is called.
- * This routine should only be called once during system initialization.
- * @param None
- * @return None
+ * @brief Initializes the system module.
+ * This routine is called only once during system initialization, before calling other APIs.
+ * @param None.
+ * @return None.
 */
 void SYSTEM_Initialize(void);
 

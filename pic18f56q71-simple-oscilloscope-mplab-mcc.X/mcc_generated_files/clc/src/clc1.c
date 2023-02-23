@@ -1,16 +1,16 @@
 /**
- * CLC1 Generated Driver File
+ * CLC1 Generated Driver File.
  * 
  * @file clc1.c
  * 
  * @ingroup  clc1
  * 
- * @brief This is the generated driver implementation file for the CLC1 driver.
+ * @brief This file contains the API implementations for the CLC1 driver.
  *
  * @version CLC1 Driver Version 1.0.1
 */
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 

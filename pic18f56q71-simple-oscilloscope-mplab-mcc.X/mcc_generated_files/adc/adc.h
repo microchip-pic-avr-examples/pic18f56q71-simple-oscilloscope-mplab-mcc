@@ -7,10 +7,10 @@
  * 
  * @brief This is the generated header file for the ADC driver.
  *
- * @version ADC Driver Version 1.0.0
+ * @version ADC Driver Version 1.0.1
 */
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -33,10 +33,6 @@
 #ifndef ADC_H
 #define ADC_H
 
-/**
-  Section: Included Files
-*/
-
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -46,225 +42,225 @@ typedef __uint24 uint24_t;
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_Initialize API
+ * @brief    Defines the Custom Name for the \ref ADC_Initialize API
  */
 #define ADC_Initialize ADC_Initialize
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_SelectContext API
+ * @brief    Defines the Custom Name for the \ref ADC_SelectContext API
  */
 #define ADC_SelectContext ADC_SelectContext
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_EnableChannelScan API
+ * @brief    Defines the Custom Name for the \ref ADC_EnableChannelScan API
  */
 #define ADC_EnableChannelScan ADC_EnableChannelScan
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_DisableChannelScan API
+ * @brief    Defines the Custom Name for the \ref ADC_DisableChannelScan API
  */
 #define ADC_DisableChannelScan ADC_DisableChannelScan
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_EnableChannelSequencer API
+ * @brief    Defines the Custom Name for the \ref ADC_EnableChannelSequencer API
  */
 #define ADC_EnableChannelSequencer  ADC_EnableChannelSequencer
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_DisableChannelSequencer API
+ * @brief    Defines the Custom Name for the \ref ADC_DisableChannelSequencer API
  */
 #define ADC_DisableChannelSequencer ADC_DisableChannelSequencer
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_SetChannel API
+ * @brief    Defines the Custom Name for the \ref ADC_SetChannel API
  */
 #define ADC_SetChannel ADC_SetChannel
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_DischargeSampleCapacitor API
+ * @brief    Defines the Custom Name for the \ref ADC_DischargeSampleCapacitor API
  */
 #define ADC_DischargeSampleCapacitor ADC_DischargeSampleCapacitor
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_StartConversionOnChannel API
+ * @brief    Defines the Custom Name for the \ref ADC_StartConversionOnChannel API
  */
 #define ADC_StartConversionOnChannel ADC_StartConversionOnChannel
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_StartConversion API
+ * @brief    Defines the Custom Name for the \ref ADC_StartConversion API
  */
 #define ADC_StartConversion ADC_StartConversion
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_StopConversion API
+ * @brief    Defines the Custom Name for the \ref ADC_StopConversion API
  */
 #define ADC_StopConversion ADC_StopConversion
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_IsConversionDone API
+ * @brief    Defines the Custom Name for the \ref ADC_IsConversionDone API
  */
 #define ADC_IsConversionDone ADC_IsConversionDone
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_GetConversionResult API
+ * @brief    Defines the Custom Name for the \ref ADC_GetConversionResult API
  */
 #define ADC_GetConversionResult ADC_GetConversionResult
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_GetSingleConversion API
+ * @brief    Defines the Custom Name for the \ref ADC_GetSingleConversion API
  */
 #define ADC_GetSingleConversion ADC_GetSingleConversion
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_GetConversionStageStatus API
+ * @brief    Defines the Custom Name for the \ref ADC_GetConversionStageStatus API
  */
 #define ADC_GetConversionStageStatus ADC_GetConversionStageStatus
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_EnableContinuousConversion API
+ * @brief    Defines the Custom Name for the \ref ADC_EnableContinuousConversion API
  */
 #define ADC_EnableContinuousConversion ADC_EnableContinuousConversion
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_DisableContinuousConversion API
+ * @brief    Defines the Custom Name for the \ref ADC_DisableContinuousConversion API
  */
 #define ADC_DisableContinuousConversion ADC_DisableContinuousConversion
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_SetStopOnInterrupt API
+ * @brief    Defines the Custom Name for the \ref ADC_SetStopOnInterrupt API
  */
 #define ADC_SetStopOnInterrupt ADC_SetStopOnInterrupt
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_EnableDoubleSampling API
+ * @brief    Defines the Custom Name for the \ref ADC_EnableDoubleSampling API
  */
 #define ADC_EnableDoubleSampling ADC_EnableDoubleSampling
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_SetAcquisitionRegister API
+ * @brief    Defines the Custom Name for the \ref ADC_SetAcquisitionRegister API
  */
 #define ADC_SetAcquisitionRegister ADC_SetAcquisitionRegister
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_SetPrechargeRegister API
+ * @brief    Defines the Custom Name for the \ref ADC_SetPrechargeRegister API
  */
 #define ADC_SetPrechargeRegister ADC_SetPrechargeRegister
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_DefineSetPoint API
+ * @brief    Defines the Custom Name for the \ref ADC_DefineSetPoint API
  */
 #define ADC_DefineSetPoint ADC_DefineSetPoint
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_SetUpperThreshold API
+ * @brief    Defines the Custom Name for the \ref ADC_SetUpperThreshold API
  */
 #define ADC_SetUpperThreshold ADC_SetUpperThreshold
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_SetLowerThreshold API
+ * @brief    Defines the Custom Name for the \ref ADC_SetLowerThreshold API
  */
 #define ADC_SetLowerThreshold ADC_SetLowerThreshold
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_HasErrorCrossedUpperThreshold API
+ * @brief    Defines the Custom Name for the \ref ADC_HasErrorCrossedUpperThreshold API
  */
 #define ADC_HasErrorCrossedUpperThreshold ADC_HasErrorCrossedUpperThreshold
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_HasErrorCrossedLowerThreshold API
+ * @brief    Defines the Custom Name for the \ref ADC_HasErrorCrossedLowerThreshold API
  */
 #define ADC_HasErrorCrossedLowerThreshold ADC_HasErrorCrossedLowerThreshold
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_SetRepeatCount API
+ * @brief    Defines the Custom Name for the \ref ADC_SetRepeatCount API
  */
 #define ADC_SetRepeatCount ADC_SetRepeatCount
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_GetCurrentCountofConversions API
+ * @brief    Defines the Custom Name for the \ref ADC_GetCurrentCountofConversions API
  */
 #define ADC_GetCurrentCountofConversions ADC_GetCurrentCountofConversions
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_GetAccumulatorValue API
+ * @brief    Defines the Custom Name for the \ref ADC_GetAccumulatorValue API
  */
 #define ADC_GetAccumulatorValue ADC_GetAccumulatorValue
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_ClearAccumulator API
+ * @brief    Defines the Custom Name for the \ref ADC_ClearAccumulator API
  */
 #define ADC_ClearAccumulator ADC_ClearAccumulator
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_HasAccumulatorOverflowed API
+ * @brief    Defines the Custom Name for the \ref ADC_HasAccumulatorOverflowed API
  */
 #define ADC_HasAccumulatorOverflowed ADC_HasAccumulatorOverflowed
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_GetErrorCalculation API
+ * @brief    Defines the Custom Name for the \ref ADC_GetErrorCalculation API
  */
 #define ADC_GetErrorCalculation ADC_GetErrorCalculation
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_GetPreviousResult API
+ * @brief    Defines the Custom Name for the \ref ADC_GetPreviousResult API
  */
 #define ADC_GetPreviousResult ADC_GetPreviousResult
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_GetFilterValue API
+ * @brief    Defines the Custom Name for the \ref ADC_GetFilterValue API
  */
 #define ADC_GetFilterValue ADC_GetFilterValue
 
 /**
  * @ingroup  adc
- * @brief    This macro defines the Custom Name for \ref ADC_SetADIInterruptHandler API
+ * @brief    Defines the Custom Name for the \ref ADC_SetADIInterruptHandler API
  */
 #define ADC_SetADIInterruptHandler ADC_SetADIInterruptHandler
 
 /**
  @ingroup adc
  @typedef adc_result_t
- @brief This typedef should be used for result of A/D conversion.
+ @brief Displays the result of the Analog-to-Digital (A/D) conversion.
  */
 typedef uint16_t adc_result_t;
 
 /**
  * @ingroup adc
  * @enum adc_channel_t
- * @brief This enumeration contains available ADC channels.
+ * @brief Contains the available ADC channels.
 */
 typedef enum
 {
@@ -278,21 +274,21 @@ typedef enum
     channel_DAC1 =  0x3d,
     channel_FVR_Buffer1 =  0x3e,
     channel_FVR_Buffer2 =  0x3f,
-    channel_OPA1IN0_pos =  0x42,
-    channel_OPA1IN1_pos =  0x44,
-    channel_OPA1IN2_pos =  0x45,
-    channel_OPA1IN3_pos =  0x49,
-    channel_OPA2IN0_pos =  0x81,
-    channel_OPA2IN1_pos =  0x8a,
-    channel_OPA2IN2_pos =  0x8b,
-    channel_OPA2IN3_pos =  0x8c,
+    channel_OPA1IN0_pos =  0x82,
+    channel_OPA1IN1_pos =  0x84,
+    channel_OPA1IN2_pos =  0x85,
+    channel_OPA1IN3_pos =  0x89,
+    channel_OPA2IN0_pos =  0x4c,
+    channel_OPA2IN1_pos =  0x41,
+    channel_OPA2IN2_pos =  0x4b,
+    channel_OPA2IN3_pos =  0x4a,
     channel_ANA1 =  0x1
 } adc_channel_t;
 
 /**
  @ingroup adc
  @enum ADC_context_t
- @brief This enumeration contains available ADC contexts.
+ @brief Contains the available ADC contexts.
  */
 typedef enum
 {
@@ -301,304 +297,301 @@ typedef enum
 
 /**
  * @ingroup adc
- * @brief This API initializes the ADC module. This routine must be called before any other ADC routine.
- * @param none
- * @return none
+ * @brief Initializes the ADC module. This routine must be called before other ADC APIs.
+ * @param None.
+ * @return None.
 */
 void ADC_Initialize(void);
 
 /**
  * @ingroup adc
- * @brief This API is used to select an ADC context to perform read/write operations on 
- *        context specific registers.
- * @param Context to be selected. Refer @ref adc_context_t for available contexts
- * @return void
+ * @brief Selects an ADC context to perform read/write operations on context-specific registers.
+ * @param context - Context to be selected. Refer to the @ref adc_context_t enum for the list of available contexts.
+ * @return None.
 */
 inline void ADC_SelectContext(adc_context_t context);
 
 /**
  * @ingroup adc
- * @brief This API is used to include a channel context in the scan sequence.
- *        Correct context should be selected using @ref ADC_SelectContext before calling this API.
- * @param Context which needs to be included in scan. Refer @ref adc_context_t for available contexts
- * @return void
+ * @brief Includes a channel context in the scan sequence.
+ *        Select the correct context using @ref ADC_SelectContext before calling this API.
+ * @param context - Context which needs to be included in the scan. Refer to the @ref adc_context_t enum for the list of available contexts.
+ * @return None.
 */
 void ADC_EnableChannelScan(adc_context_t context);
  
 /**
  * @ingroup adc
- * @brief This API is used to exclude a channel context from the scan sequence.
- *        Correct context should be selected using @ref ADC_SelectContext before calling this API.
- * @param Context which needs to be excluded from scan. Refer @ref adc_context_t for available contexts
- * @return void
+ * @brief Excludes a channel context from the scan sequence.
+ *        Select the correct context using @ref ADC_SelectContext before calling this API.
+ * @param context - Context which needs to be excluded from the scan. Refer to the @ref adc_context_t enum for the list of available contexts.
+ * @return None.
 */
 void ADC_DisableChannelScan(adc_context_t context);
 
 /**
  * @ingroup adc
- * @brief This API enables ADC channel sequencer.
- *        ADC module should be initialized using @ref ADC_Initialize before calling this API.
- * @param void
- * @return void
+ * @brief Enables the ADC channel sequencer.
+ *        Initialize the ADC module using @ref ADC_Initialize before calling this API.
+ * @param None.
+ * @return None.
 */
 inline void ADC_EnableChannelSequencer(void);
 
 /**
  * @ingroup adc
- * @brief This API disables ADC channel sequencer.
- *        ADC module should be initialized using @ref ADC_Initialize before calling this API.
- * @param void
- * @return void
+ * @brief Disables the ADC channel sequencer.
+ *        Initialize the ADC module using @ref ADC_Initialize before calling this API.
+ * @param None.
+ * @return None.
 */
 inline void ADC_DisableChannelSequencer(void);    
 
 /**
  * @ingroup adc
  * @brief Sets the positive channel as per user selection
- * @pre adc should be initialized with ADC_Initialize() before calling this API.
- * @param Desired analog channel. For available analog channels refer adc_channel_t enum from adc.h file
- * @return None
+ * @pre Initialize the ADC with ADC_Initialize() before calling this API.
+ * @param channel - Desired analog channel. Refer to the adc_channel_t enum for the list of available analog channels.
+ * @return None.
 */
 inline void ADC_SetChannel(adc_channel_t channel);
 
 /**
  * @ingroup adc
- * @brief This API is used to discharge input sample capacitor for selected context by
- *        setting the channel to AVss.
- *        Correct ADC context should be selected using @ref ADC_SelectContext
- *        before calling this API.
- * @param void
- * @return void
+ * @brief Discharges the input sample capacitor for the selected context by setting the channel to AVss.
+ * Use @ref ADC_SelectContext to select the correct ADC context before calling this API.
+ * @param None.
+ * @return None.
 */
 inline void ADC_DischargeSampleCapacitor(void); 
 
 /**
  * @ingroup adc
- * @brief This API starts A/D conversion on selected channel.
- * @param channel - Analog channel number on which A/D conversion has to be applied.
- *                  Refer adc_channel_t for available list of channels
- * @return none
+ * @brief Starts the A/D conversion on the selected channel.
+ * @param channel - Analog channel number on which the A/D conversion has to be applied.
+ *                  Refer to adc_channel_t for the list of available channels.
+ * @return None.
 */
 void ADC_StartConversionOnChannel(adc_channel_t channel);
 
 /**
  * @ingroup adc
- * @brief This API starts A/D conversion on selected channel.
- * @param none
- * @return none
+ * @brief Starts the A/D conversion on the selected channel.
+ * @param None.
+ * @return None.
 */
 inline void ADC_StartConversion(void);
 
 /**
  * @ingroup adc
- * @brief This API is used to stop ongoing A/D conversion.
- * @pre ADC_StartConversion() function should have been called before calling this function.
- * @param none
- * @return none
+ * @brief Stops the ongoing A/D conversion.
+ * @pre Call ADC_StartConversion() before calling this function.
+ * @param None.
+ * @return None.
 */
 inline void ADC_StopConversion(void);
 
 /**
  * @ingroup adc
- * @brief This API checks if ongoing A/D conversion is complete.
- * @pre ADC_StartConversion() should be called before calling this function.
- * @param none
- * @retval true - if conversion is complete
- * @retval false - if conversion is ongoing
+ * @brief Checks if the ongoing A/D conversion is complete.
+ * @pre Call ADC_StartConversion() before calling this function.
+ * @param None.
+ * @retval True - Conversion is complete.
+ * @retval False - Conversion is ongoing.
 */
 inline bool ADC_IsConversionDone(void);
 
 /**
  * @ingroup adc
- * @brief This API is used to retrieve the result of latest A/D conversion.
- * @pre ADC_StartConversion() should be called before calling this function and completion status should be checked using ADC_IsConversionDone() routine.
- * @param none
- * @return The result of A/D conversion. Refer adc_result_t
+ * @brief Retrieves the result of the latest A/D conversion.
+ * @pre Call ADC_StartConversion() before calling this function and check the completion status using the ADC_IsConversionDone() API.
+ * @param None.
+ * @return The result of the A/D conversion. Refer to adc_result_t.
 */
 inline adc_result_t ADC_GetConversionResult(void);
 
 /**
  * @ingroup adc
- * @brief This API is used to retrieve the result of single A/D conversion on given channel in single-ended mode.
- * @pre ADC_DisableContinuousConversion function should have been called before calling this function
- * @param channel - Analog channel number on which A/D conversion has to be applied.
- *                  Refer adc_channel_t  for available channels
- * @return The result of A/D conversion. Refer adc_result_t
+ * @brief Retrieves the result of a single A/D conversion on the given channel in Single-Ended mode.
+ * @pre Call ADC_DisableContinuousConversion() before calling this function.
+ * @param channel - Analog channel number on which the A/D conversion has to be applied.
+ *                  Refer to adc_channel_t for the available channels.
+ * @return The result of the A/D conversion. Refer to adc_result_t.
 */
 adc_result_t ADC_GetSingleConversion(adc_channel_t channel);
 
 /**
  * @ingroup adc
- * @brief This API is used retrieve the multi-stage status.
- * @pre ADC_StartConversion() should be called before calling this function.
- * @param none
- * @return Contents of ADC STATUS register.
+ * @brief Retrieves the ADC module cycle multi-stage status.
+ * @pre Call ADC_StartConversion() before calling this function.
+ * @param None.
+ * @return Contents of the ADC Status (ADSTAT) register.
 */
 inline uint8_t ADC_GetConversionStageStatus(void);
 
 /**
  * @ingroup adc
- * @brief This API enables continuous conversion.
- * @param none
- * @return none
+ * @brief Enables continuous conversion.
+ * @param None.
+ * @return None.
 */
 inline void ADC_EnableContinuousConversion(void);
 
 /**
  * @ingroup adc
- * @brief This API disables continuous conversion.
- * @param none
- * @return none
+ * @brief Disables continuous conversion.
+ * @param None.
+ * @return None.
 */
 inline void ADC_DisableContinuousConversion(void);
 
 /**
  * @ingroup adc
- * @brief This API is used enable Stop On Interrupt bit.
- * @pre ADC_EnableContinuousConversion() function should have been called before calling this function.
- * @param none
- * @return none
+ * @brief Enables the Stop-on-Interrupt bit.
+ * @pre Call ADC_EnableContinuousConversion() before calling this function.
+ * @param None.
+ * @return None.
 */
 inline void ADC_SetStopOnInterrupt(void);
 
 /**
  * @ingroup adc
- * @brief This API enables double-sampling bit.
- * @param none
- * @return none
+ * @brief Enables the Double-Sample Enable bit.
+ * @param None.
+ * @return None.
 */
 inline void ADC_EnableDoubleSampling(void);
 
 /**
  * @ingroup adc
- * @brief This API is used to load ADC Acquisition Time Control register with specified value.
- * @param acquisitionValue - Value to be loaded in the acquisition time control register.
- * @return none
+ * @brief Loads the ADC Acquisition Time Control (ADACQ) register with the specified value.
+ * @param acquisitionValue - Value to be loaded in the ADC Acquisition Time Control register.
+ * @return None.
 */
 void ADC_SetAcquisitionRegister(uint16_t acquisitionValue);
 
 /**
  * @ingroup adc
- * @brief This API is used to load ADC Precharge Time Control register with specified value.
- * @param prechargeTime - Value to be loaded in the precharge time control register.
- * @return none
+ * @brief Loads the ADC Precharge Time Control (ADPRE) register with the specified value.
+ * @param prechargeTime - Value to be loaded in the ADC Precharge Time Control register.
+ * @return None.
 */
 void ADC_SetPrechargeRegister(uint16_t prechargeTime);
 
 /**
  * @ingroup adc
- * @brief This API used to set value of ADC Threshold Set-point.
- * @param setPoint - 16-bit value for set point.
- * @return none
+ * @brief Sets the value of the ADC Threshold Setpoint (ADSTPT) register.
+ * @param setPoint - 16-bit value for the ADC Threshold Setpoint register.
+ * @return None.
 */
 void ADC_DefineSetPoint(uint16_t setPoint);
 /**
  * @ingroup adc
- * @brief This API used to set value of ADC Upper Threshold register.
- * @param upperThreshold - 16-bit value for upper threshold.
- * @return none
+ * @brief Sets the value of the ADC Upper Threshold (ADUTH) register.
+ * @param upperThreshold - 16-bit value for the ADC Upper Threshold register.
+ * @return None.
 */
 void ADC_SetUpperThreshold(uint16_t upperThreshold);
 
 /**
  * @ingroup adc
- * @brief This API used to set value of ADC Lower Threshold register.
- * @param lowerThreshold - 16-bit value for lower threshold.
- * @return none
+ * @brief Sets the value of the ADC Lower Threshold (ADLTH) register.
+ * @param lowerThreshold - 16-bit value for the ADC Lower Threshold register.
+ * @return None.
 */
 void ADC_SetLowerThreshold(uint16_t lowerThreshold);
 /**
  * @ingroup adc
- * @brief This API is used to determine if ADC error has crossed the upper threshold.
- * @pre ADC_StartConversion() should be called before calling this function.
- * @param none
- * @retval true - if ERR > UTH
- * @retval false - if ERR <= UTH
+ * @brief Determines if the ADC error is higher than the upper threshold.
+ * @pre Call ADC_StartConversion() before calling this function.
+ * @param None.
+ * @retval True - ADC error has crossed the upper threshold.
+ * @retval False - ADC error has not crossed the upper threshold. 
 */
 inline bool ADC_HasErrorCrossedUpperThreshold(void);
 
 /**
  * @ingroup adc
- * @brief This API is used to determine if ADC error is less than the lower threshold.
- * @pre ADC_StartConversion() should be called before calling this function.
- * @param none
- * @retval true - if ERR < LTH
- * @retval false - if ERR >= LTH
+ * @brief Determines if the ADC error is less than the lower threshold.
+ * @pre Call ADC_StartConversion() before calling this function.
+ * @param None.
+ * @retval True - ADC error is less than the lower threshold.
+ * @retval False - ADC error is higher than the lower threshold.
 */
 inline bool ADC_HasErrorCrossedLowerThreshold(void);
 
 /**
  * @ingroup adc
- * @brief This API is used to load repeat counter with specified value.
- * @param repeatCount - Value to be loaded to repeat counter.
- * @return none
+ * @brief Loads the ADC Repeat Counter (ADCNT) with the specified value.
+ * @param repeatCount - Value to be loaded to the ADC Repeat Counter register.
+ * @return None.
 */
 inline void ADC_SetRepeatCount(uint8_t repeatCount);
 
 /**
  * @ingroup adc
- * @brief This API retrieves the current value of ADC Repeat Count register.
- * @pre ADC_StartConversion() should be called before calling this function.
- * @param none
- * @return Current value of ADC Repeat Count register
+ * @brief Retrieves the current value of the ADC Repeat Counter (ADCNT) register.
+ * @pre Call ADC_StartConversion() before calling this function.
+ * @param None.
+ * @return Current value of the ADC Repeat Counter register.
 */
 inline uint8_t ADC_GetCurrentCountofConversions(void);
 
 /**
  * @ingroup adc
- * @brief This API retrieves 24-bit value of ADC accumulator.
- * @param none
- * @return Value of ADC accumulator.
+ * @brief Retrieves a 24-bit value from the ADC accumulator.
+ * @param None.
+ * @return Value of the ADC accumulator.
 */
 inline uint24_t ADC_GetAccumulatorValue(void);
 /**
  * @ingroup adc
- * @brief This API clears the accumulator.
- * @param none
- * @return none
+ * @brief Clears the accumulator.
+ * @param None.
+ * @return None.
 */
 inline void ADC_ClearAccumulator(void);
 
 /**
  * @ingroup adc
- * @brief This API is used to determine whether ADC accumulator has overflowed.
- * @pre ADC_StartConversion() should be called before calling this function.
- * @param none
- * @retval true - ADC accumulator has overflowed
- * @retval false - ADC accumulator has not overflowed
+ * @brief Determines if the ADC accumulator has overflowed.
+ * @pre Call ADC_StartConversion() before calling this function.
+ * @param None.
+ * @retval True - ADC accumulator has overflowed.
+ * @retval False - ADC accumulator has not overflowed.
 */
 inline bool ADC_HasAccumulatorOverflowed(void);
 
 /**
  * @ingroup adc
- * @brief This API retrieves the value of ADC Set-point Error register.
- * @pre ADC_StartConversion() should be called before calling this function.
- * @param none
- * @return 16-bit value obtained from ADERRH and ADERRL registers.
+ * @brief Retrieves the value of the ADC Setpoint Error (ADERR) register.
+ * @pre Call ADC_StartConversion() before calling this function.
+ * @param None.
+ * @return 16-bit value obtained from the high byte ADERR (ADERRH) and low byte ADERR (ADERRL) registers.
 */
 inline int16_t ADC_GetErrorCalculation(void);
 
 /**
  * @ingroup adc
- * @brief This API retrieves the value of ADC Previous register.
- * @pre ADC_StartConversion() should be called before calling this function.
- * @param none
- * @return 16-bit value obtained from ADPREVH and ADPREVL registers.
+ * @brief Retrieves the value of the ADC Previous Result (ADPREV) register.
+ * @pre Call ADC_StartConversion() before calling this function.
+ * @param None.
+ * @return 16-bit value obtained from the high byte ADPREV (ADPREVH) and low byte ADPREV (ADPREVL) registers.
 */
 inline uint16_t ADC_GetPreviousResult(void);
 
 /**
  * @ingroup adc
- * @brief This API retrieves the value of ADC Filter register.
- * @param none
- * @return 16-bit value obtained from ADFLTRH and ADFLTRL registers.
+ * @brief Retrieves the value of the ADC Filter (ADFLTR) register.
+ * @param None.
+ * @return 16-bit value obtained from the high byte ADFLTR (ADFLTRH) and low byte ADFLTR (ADFLTRL) registers.
 */
 inline uint16_t ADC_GetFilterValue(void);
 /**
  * @ingroup adc
- * @brief This routine is used to set the callback for the ADI Interrupt.
- * @param Callback Function to be called
- * @return none
+ * @brief Sets the callback for the ADC Interrupt Service Routine (ISR).
+ * @param InterruptHandler - Callback function to be called.
+ * @return None.
 */
 void ADC_SetADIInterruptHandler(void (* InterruptHandler)(void));
 

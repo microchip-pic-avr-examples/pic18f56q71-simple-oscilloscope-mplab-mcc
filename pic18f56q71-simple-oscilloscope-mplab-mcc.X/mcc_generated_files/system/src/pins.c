@@ -12,7 +12,7 @@
 */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -136,15 +136,9 @@ void PIN_MANAGER_Initialize(void)
     IOCCP = 0x0;
     IOCCN = 0x0;
     IOCCF = 0x0;
-    IOCDP = 0x0;
-    IOCDN = 0x0;
-    IOCDF = 0x0;
     IOCEP = 0x0;
     IOCEN = 0x0;
     IOCEF = 0x0;
-    IOCFP = 0x0;
-    IOCFN = 0x0;
-    IOCFF = 0x0;
 
 
 }

@@ -5,13 +5,13 @@
  * 
  * @defgroup config_bitsdriver CONFIGBITS Driver 
  * 
- * @brief This is the generated header file for the CONFIGURATION BITS.
+ * @brief This is the generated header file for the Configuration bits driver.
  *
  * @version Driver Version 1.0.0
 */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -33,9 +33,7 @@
 
 #ifndef CONFIG_BITS_H
 #define	CONFIG_BITS_H
-/**
-   Section: Included Files
- */
+
 #include "../system/clock.h"
 
 #endif	/* CONFIG_BITS_H */

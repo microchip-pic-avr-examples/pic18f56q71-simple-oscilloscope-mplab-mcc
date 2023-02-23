@@ -7,10 +7,10 @@
  * 
  * @brief This file contains API prototypes and other datatypes for UART2 module.
  *
- * @version UART2 Driver Version 3.0.0
+ * @version UART2 Driver Version 3.0.3
 */
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -62,8 +62,8 @@
 
 #define UART2_TransmitEnable       UART2_TransmitEnable
 #define UART2_TransmitDisable      UART2_TransmitDisable
-#define UART2_AutoBaudSet          (NULL)
-#define UART2_AutoBaudQuery        (NULL)
+#define UART2_AutoBaudSet          UART2_AutoBaudSet
+#define UART2_AutoBaudQuery        UART2_AutoBaudQuery
 #define UART2_BRGCountSet               (NULL)
 #define UART2_BRGCountGet               (NULL)
 #define UART2_BaudRateSet               (NULL)
@@ -189,6 +189,47 @@ inline void UART2_SendBreakControlEnable(void);
  * @return None.
  */
 inline void UART2_SendBreakControlDisable(void);
+
+/**
+ * @ingroup uart2
+ * @brief This API enables the UART2 AutoBaud Detection.
+ * @param bool enable.
+ * @return None.
+ */
+inline void UART2_AutoBaudSet(bool enable);
+
+
+/**
+ * @ingroup uart2
+ * @brief This API reads the UART2 AutoBaud Detection Complete bit.
+ * @param None.
+ * @return None.
+ */
+inline bool UART2_AutoBaudQuery(void);
+
+/**
+ * @ingroup uart2
+ * @brief This API Reset the UART2 AutoBaud Detection Complete bit.
+ * @param None.
+ * @return None.
+ */
+inline void UART2_AutoBaudDetectCompleteReset(void);
+
+/**
+ * @ingroup uart2
+ * @brief This API reads the UART2 AutoBaud Detection overflow bit.
+ * @param None.
+ * @return None.
+ */
+inline bool UART2_IsAutoBaudDetectOverflow(void);
+
+/**
+ * @ingroup uart2
+ * @brief This API Reset the UART2 AutoBaud Detection Overflow bit.
+ * @param None.
+ * @return None.
+ */
+inline void UART2_AutoBaudDetectOverflowReset(void);
 
 /**
  * @ingroup uart2

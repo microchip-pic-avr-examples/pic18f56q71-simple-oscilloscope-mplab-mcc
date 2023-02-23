@@ -1,16 +1,16 @@
 /**
- * CLC2 Generated Driver API Header File
+ * CLC2 Generated Driver API Header File.
  * 
  * @file clc2.h
  * 
  * @defgroup  clc2 CLC2
  * 
- * @brief This is the generated header file for the CLC2 driver.
+ * @brief This file contains the API prototypes for the CLC2 driver.
  *
  * @version CLC2 Driver Version 1.0.1
 */
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -40,26 +40,26 @@
 /**
  * @ingroup clc2
  * @brief  Initializes the CLC2. This routine configures the CLC2 specific control registers.
- * @param none
- * @return none
+ * @param None.
+ * @return None.
  * 
  */
 void CLC2_Initialize(void);
 
 /**
  * @ingroup clc
- * @brief This routine is used to set the callback for the Interrupt.
- * @param Callback Function to be called
- * @return none
+ * @brief Sets the callback function for the interrupt event.
+ * @param *InterruptHandler - Callback function for the interrupt event.
+ * @return None.
 */
 void CLC2_CLCI_SetInterruptHandler(void (* InterruptHandler)(void));
 
 /**
  * @ingroup clc2
- * @brief This routine returns output pin status of the CLC module.
- * @param  none
- * @retval true - if pin Status is true.
- * @retval false - if pin Status is false.
+ * @brief Returns the output pin status of the CLC module.
+ * @param  None.
+ * @retval True - Output is 1.
+ * @retval False - Output is 0.
  */
 bool CLC2_OutputStatusGet(void);
 

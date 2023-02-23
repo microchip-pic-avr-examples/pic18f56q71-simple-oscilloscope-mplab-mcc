@@ -1,16 +1,16 @@
 /**
- * NCO1 Generated Driver API Header File
+ * NCO1 Generated Driver API Header File.
  * 
  * @file nco1.h
  * 
  * @defgroup  nco1 NCO1
  * 
- * @brief This is the generated header file for the NCO1 driver.
+ * @brief This file contains the API prototypes for the NCO1 driver.
  *
  * @version NCO1 Driver Version 2.0.1
 */
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -46,10 +46,9 @@
 
 /**
  * @ingroup nco1
- * @brief  This routine initializes the NCO1_Initialize. Initializes the NCO1_Initialize
- * @param none
- * @return none
- * 
+ * @brief Initializes the NCO1 module. This routine must be called once before any other NCO1 APIs.
+ * @param None.
+ * @return None.
  */
 void NCO1_Initialize(void);
 
@@ -57,11 +56,11 @@ void NCO1_Initialize(void);
 
 /**
  * @ingroup nco1
- * @brief This routine returns the NCO1 output status.
- * @pre NCO1_Initialize() function should have been called before calling this function.
- * @param none
- * @retval 1 - Indicates output is high.
- * @retval 0 - Indicates output is low.
+ * @brief Returns the NCO1 output level.
+ * @pre NCO1_Initialize() is already called.
+ * @param None.
+ * @retval 1 - Output is high.
+ * @retval 0 - Output is low.
  * 
  */
 bool NCO1_GetOutputStatus(void);

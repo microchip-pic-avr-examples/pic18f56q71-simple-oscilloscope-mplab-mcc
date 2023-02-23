@@ -1,17 +1,17 @@
 /**
- * DMA1 Generated Driver File
+ * DMA1 Generated Driver File.
  * 
  * @file dma1.c
  * 
  * @ingroup  dma1
  * 
- * @brief This is the generated driver implementation file for the DMA1 driver.
+ * @brief This file contains the API implementations for the DMA1 driver.
  *
  * @version DMA1 Driver Version 2.11.0
  */ 
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -156,7 +156,6 @@ void DMA1_StopTransfer(void)
 
 void DMA1_SetDMAPriority(uint8_t priority)
 {
-    // This function is dependant on the PR1WAY CONFIG bit
 	PRLOCK = 0x55;
 	PRLOCK = 0xAA;
 	PRLOCKbits.PRLOCKED = 0;

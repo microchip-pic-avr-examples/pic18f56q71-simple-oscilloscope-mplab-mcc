@@ -1,17 +1,17 @@
 /**
- * FVR Generated Driver File
+ * FVR Generated Driver File.
  *
  * @file fvr.c
  * 
  * @ingroup fvr 
  * 
- * @brief This file contains the driver code for FVR module.
+ * @brief This file contains the API implementation for the FVR module.
  * 
  * @version FVR Driver Version 2.0.1
 */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -34,16 +34,12 @@
 /**
   Section: Included Files
 */
-
 #include <xc.h>
 #include "../fvr.h"
-
-
 
 /**
   Section: FVR APIs
 */
-
 void FVR_Initialize(void)
 {
     // ADFVR off; CDAFVR 1x; TSRNG Lo_range; TSEN disabled; FVREN enabled; 

@@ -1,17 +1,17 @@
 /**
- * DMA2 Generated Driver API Header File
+ * DMA2 Generated Driver API Header File.
  * 
  * @file dma2.h
  * 
  * @defgroup  dma2 DMA2
  * 
- * @brief This is the generated header file for the DMA2 driver.
+ * @brief This file contains the API prototypes for the DMA2 driver.
  *
  * @version DMA2 Driver Version 2.11.0
  */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -42,8 +42,7 @@
 
 /**
  * @ingroup dma2
- * @brief Initializes the DMA2 module
- *        This routine must be called before any other DMA2 routine
+ * @brief Initializes the DMA2 module. This is called only once before calling other DMA2 APIs.
  * @param None.
  * @return None. 
  */
@@ -51,79 +50,79 @@ void DMA2_Initialize(void);
 
 /**
  * @ingroup dma2
- * @brief Sets the source region as per user selection
- * @param [in] Desired source region 
+ * @brief Sets the source region.
+ * @param [in] region - Desired source region.
  * @return None.
  */
 void DMA2_SelectSourceRegion(uint8_t region);
 
 /**
  * @ingroup dma2
- * @brief Sets the Source Address for the DMA packet
- * @param [in] Desired Source Address
+ * @brief Sets the source address for the DMA packet.
+ * @param [in] address - Desired source address.
  * @return None.
  */
 void DMA2_SetSourceAddress(uint24_t address);
 
 /**
  * @ingroup dma2
- * @brief Sets the destination address for the DMA packet
- * @param [in] Desired Destination Address 
+ * @brief Sets the destination address for the DMA packet.
+ * @param [in] address - Desired destination address.
  * @return None.
  */
 void DMA2_SetDestinationAddress(uint16_t address);
 
 /**
  * @ingroup dma2
- * @brief Sets the size of the Source array 
- * @param [in] Size of Source Array
+ * @brief Sets the size of the source array.
+ * @param [in] size - Size of the source array in bytes.
  * @return None.
  */
 void DMA2_SetSourceSize(uint16_t size);
 
 /**
  * @ingroup dma2
- * @brief Sets the size of the destination array
- * @param [in] Size of Destination array
+ * @brief Sets the size of the destination array.
+ * @param [in] size - Size of the destination array in bytes.
  * @return None.
  */
 void DMA2_SetDestinationSize(uint16_t size);
 
 /**
  * @ingroup dma2
- * @brief Returns the current location from which the DMA has read
- * @return Current Source pointer
- * @param None
+ * @brief Returns the current location read by the DMA.
+ * @param None.
+ * @return Current address pointer to the source.
  */
 uint24_t DMA2_GetSourcePointer(void);
 
 /**
  * @ingroup dma2
- * @brief Returns the current location where the DMA last wrote
- * @param None 
- * @return Current Destination pointer
+ * @brief Returns the current location written by the DMA.
+ * @param None.
+ * @return Current address pointer to the destination.
  */
 uint16_t DMA2_GetDestinationPointer(void);
 
 /**
  * @ingroup dma2
- * @brief Sets the Start Trigger for DMA, doesn't start the transfer
- * @param [in] Start Trigger Source
+ * @brief Sets the Start Trigger for the DMA. Note that this function does not start the transfer.
+ * @param [in] sirq - Start trigger source.
  * @return None.
  */
 void DMA2_SetStartTrigger(uint8_t sirq);
 
 /**
  * @ingroup dma2
- * @brief Sets the Abort Trigger for DMA, doesn't abort the transfer
- * @param [in] Abort Trigger Source
+ * @brief Sets the Abort Trigger for the DMA. Note that this function does not start the transfer.
+ * @param [in] airq - Abort trigger source.
  * @return None.
  */
 void DMA2_SetAbortTrigger(uint8_t airq);
 
 /**
  * @ingroup dma2
- * @brief Starts the DMA Transfer by setting GO bit
+ * @brief Starts the DMA Transfer.
  * @param None.
  * @return None.
  */
@@ -131,7 +130,7 @@ void DMA2_StartTransfer(void);
 
 /**
  * @ingroup dma2
- * @brief Starts the DMA transfer by enabling the trigger
+ * @brief Starts the DMA transfer based on the requested interrupt source.
  * @param None.
  * @return None.
  */
@@ -139,7 +138,7 @@ void DMA2_StartTransferWithTrigger(void);
 
 /**
  * @ingroup dma2
- * @brief Stops all the possible triggers and also clears the GO bit
+ * @brief Stops the DMA transfer.
  * @param None.
  * @return None.
  */
@@ -147,9 +146,10 @@ void DMA2_StopTransfer(void);
 
 /**
  * @ingroup dma2
- * @brief Unlocks Arbiter - changes priority - locks Arbiter
- * @param [in] Priority of DMA
+ * @brief Sets the priority of the arbiter.
+ * @param [in] priority - Priority of the DMA.
  * @return None.
+ * NOTE: This function is dependent on the PR1WAY CONFIG bit.
  */
 void DMA2_SetDMAPriority(uint8_t priority);
 

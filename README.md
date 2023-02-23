@@ -12,10 +12,10 @@ In this code example, the PIC18F56Q71 microcontroller will be used to implement 
 
 ## Software Used
 
-- [MPLAB® X IDE 6.0.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q71&utm_content=pic18f56q71-simple-oscilloscope-github)
+- [MPLAB® X IDE 6.0.5 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q71&utm_content=pic18f56q71-simple-oscilloscope-github)
 - [MPLAB XC8 2.40.0 or newer compiler](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q71&utm_content=pic18f56q71-simple-oscilloscope-github)
 - [MPLAB Code Configurator](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q71&utm_content=pic18f56q71-simple-oscilloscope-github)
-- PIC18F-Q_DFP v1.14.237
+- PIC18F-Q_DFP v1.15.360
 
 ## Hardware Used
 

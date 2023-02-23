@@ -1,17 +1,17 @@
 /**
- * FVR Generated Driver API Header File
+ * FVR Generated Driver API Header File.
  * 
  * @file fvr.h
  * 
  * @defgroup fvr FVR
  * 
- * @brief This file contains API prototypes and other datatypes for FVR module.
+ * @brief This file contains the API prototypes for the FVR module.
  *
  * @version FVR Driver Version 2.0.1
 */
 
 /*
-© [2022] Microchip Technology Inc. and its subsidiaries.
+© [2023] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -34,10 +34,10 @@
 #ifndef FVR_H
 #define FVR_H
 
+
 /**
   Section: Included Files
 */
-
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -54,19 +54,19 @@
 
 /**
  * @ingroup fvr
- * @brief This API initializes the FVR module and be called before any other FVR routines.
- * @param void
- * @return void
+ * @brief Initializes the FVR module. This is called only once before calling other FVR APIs.
+ * @param None.
+ * @return None.
  */
  void FVR_Initialize(void);
 
 /**
  * @ingroup fvr
- * @brief This routine gets the FVR output ready status.
- * @pre The FVR should have been initialized before calling this function.
- * @param void
- * @retval true if FVR module is ready for use.
- * @retval false if FVR module is not ready for use.
+ * @brief Checks if the FVR output is ready.
+ * @pre Initialize the FVR before calling this function.
+ * @param None.
+ * @retval True - FVR module is ready for use.
+ * @retval False - FVR module is not ready for use.
  */
 bool FVR_IsOutputReady(void);
 
