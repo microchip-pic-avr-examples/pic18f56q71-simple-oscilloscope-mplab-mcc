@@ -57,8 +57,8 @@ void ADC_Initialize(void)
     //CGA0 disabled; CGA1 enabled; CGA2 disabled; CGA3 disabled; CGA4 disabled; CGA5 disabled; CGA6 disabled; CGA7 disabled; 
     ADCGA = 0x2;
 
-    //CGB0 disabled; CGB1 disabled; CGB2 disabled; CGB3 disabled; CGB4 disabled; CGB5 disabled; CGB6 disabled; CGB7 disabled; 
-    ADCGB = 0x0;
+    //CGB0 disabled; CGB1 enabled; CGB2 disabled; CGB3 disabled; CGB4 disabled; CGB5 disabled; CGB6 disabled; CGB7 disabled; 
+    ADCGB = 0x2;
 
     //CGC0 disabled; CGC1 disabled; CGC2 disabled; CGC3 disabled; CGC4 disabled; CGC5 disabled; CGC6 disabled; CGC7 disabled; 
     ADCGC = 0x0;

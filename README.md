@@ -38,6 +38,7 @@ All signals (excl. analog input) are connected on the Curosity Nano without modi
 | Pin | Function
 | --- | ---------
 | RA0 | Pushbutton (SW0)
+| RA1 | OPAMP Output (reserved)
 | RB1 | Analog Input (non-demo mode)
 | RB4 | UART TX
 | RB5 | UART RX (unused, reserved)

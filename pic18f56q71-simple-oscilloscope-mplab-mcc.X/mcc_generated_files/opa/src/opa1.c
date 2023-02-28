@@ -49,8 +49,8 @@ void OPA1_Initialize(void)
     //NCH No Connection; PCH OPA1IN+; 
     OPA1CON2 = 0x2;
 
-    //FMS No Connection; INTOE Enabled; PSS OPA1IN3+; 
-    OPA1CON3 = 0x23;
+    //FMS No Connection; INTOE Disabled; PSS OPA1IN3+; 
+    OPA1CON3 = 0x3;
 
     //PTRES No reset; OFCST Calibration complete; OFCSEL Factory calibrated value in OPAxOFFSET; 
     OPA1CON4 = 0x0;

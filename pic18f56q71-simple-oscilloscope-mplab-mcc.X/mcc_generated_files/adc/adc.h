@@ -282,7 +282,8 @@ typedef enum
     channel_OPA2IN1_pos =  0x41,
     channel_OPA2IN2_pos =  0x4b,
     channel_OPA2IN3_pos =  0x4a,
-    channel_ANA1 =  0x1
+    channel_ANA1 =  0x1,
+    RB1_IN3 =  0x9
 } adc_channel_t;
 
 /**

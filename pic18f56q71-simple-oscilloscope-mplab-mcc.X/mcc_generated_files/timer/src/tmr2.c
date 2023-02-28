@@ -64,8 +64,8 @@ void Timer2_Initialize(void){
     T2HLT = 0x11;
     // TRSEL TMR4_postscaled; 
     T2RST = 0x2;
-    // PR 24; 
-    T2PR = 0x18;
+    // PR 9; 
+    T2PR = 0x9;
     // TMR 0x0; 
     T2TMR = 0x0;
 
