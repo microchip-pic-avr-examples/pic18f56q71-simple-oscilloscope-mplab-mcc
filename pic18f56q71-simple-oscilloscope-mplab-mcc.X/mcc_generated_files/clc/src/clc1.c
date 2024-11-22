@@ -7,10 +7,10 @@
  * 
  * @brief This file contains the API implementations for the CLC1 driver.
  *
- * @version CLC1 Driver Version 1.0.1
+ * @version CLC1 Driver Version 1.2.0
 */
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -35,7 +35,10 @@
 #include "../clc1.h"
 
 
-void CLC1_Initialize(void)
+static void (*CLC1_Callback)(void);
+static void CLC1_DefaultCallback(void);
+
+void CLC1_Initialize(void) 
 {
     
     // SLCT 0x0; 
@@ -63,10 +66,74 @@ void CLC1_Initialize(void)
     // LCMODE 1-input D flip-flop with S and R; LCINTN disabled; LCINTP disabled; LCEN enabled; 
     CLCnCON = 0x84;
 
+    //Set default callback for CLC1 interrupt Overflow.
+    CLC1_CallbackRegister(CLC1_DefaultCallback);
+
+    // Clear the CLC interrupt flag
+    PIR0bits.CLC1IF = 0;
+}
+
+void CLC1_Enable(void) 
+{
+    CLCSELECTbits.SLCT = 0;
+    CLCnCONbits.EN = 1;
+}
+
+void CLC1_Disable(void) 
+{
+    CLCSELECTbits.SLCT = 0;
+    CLCnCONbits.EN = 0;
+}
+
+void CLC1_RisingEdgeDetectionEnable(void) 
+{
+    CLCSELECTbits.SLCT = 0;
+    CLCnCONbits.INTP = 1;
+}
+
+void CLC1_RisingEdgeDetectionDisable(void) 
+{
+    CLCSELECTbits.SLCT = 0;
+    CLCnCONbits.INTP = 0;
+}
+
+void CLC1_FallingEdgeDetectionEnable(void) 
+{
+    CLCSELECTbits.SLCT = 0;
+    CLCnCONbits.INTN = 1;
+}
+
+void CLC1_FallingEdgeDetectionDisable(void) 
+{
+    CLCSELECTbits.SLCT = 0;
+    CLCnCONbits.INTN = 0;
+}
+
+void CLC1_CallbackRegister(void (* CallbackHandler)(void))
+{
+    CLC1_Callback = CallbackHandler;
+}
+
+static void CLC1_DefaultCallback(void)
+{
+    //Add your interrupt code here or
+    //Use CLC1_CallbackRegister function to use Custom ISR
+}
+
+void CLC1_Tasks(void)
+{
+    if(PIR0bits.CLC1IF == 1)
+    {
+        if(CLC1_Callback != NULL)
+        {
+            CLC1_Callback();
+        }
+        PIR0bits.CLC1IF = 0;
+    }
 }
 
 
-bool CLC1_OutputStatusGet(void)
+bool CLC1_OutputStatusGet(void) 
 {
     return(CLCDATAbits.CLC1OUT);
 }

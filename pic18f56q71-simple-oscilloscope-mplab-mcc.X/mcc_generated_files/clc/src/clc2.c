@@ -7,10 +7,10 @@
  * 
  * @brief This file contains the API implementations for the CLC2 driver.
  *
- * @version CLC2 Driver Version 1.0.1
+ * @version CLC2 Driver Version 1.2.0
 */
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -37,7 +37,8 @@
 static void (*CLC2_CLCI_InterruptHandler)(void);
 static void CLC2_DefaultCLCI_ISR(void);
 
-void CLC2_Initialize(void)
+
+void CLC2_Initialize(void) 
 {
     
     // SLCT 0x1; 
@@ -65,6 +66,7 @@ void CLC2_Initialize(void)
     // LCMODE 1-input D flip-flop with S and R; LCINTN enabled; LCINTP disabled; LCEN enabled; 
     CLCnCON = 0x8C;
 
+
     // Clear the CLC interrupt flag
     PIR5bits.CLC2IF = 0;
     //Configure interrupt handlers
@@ -72,6 +74,43 @@ void CLC2_Initialize(void)
     // Enabling CLC2 interrupt.
     PIE5bits.CLC2IE = 1;
 }
+
+void CLC2_Enable(void) 
+{
+    CLCSELECTbits.SLCT = 1;
+    CLCnCONbits.EN = 1;
+}
+
+void CLC2_Disable(void) 
+{
+    CLCSELECTbits.SLCT = 1;
+    CLCnCONbits.EN = 0;
+}
+
+void CLC2_RisingEdgeDetectionEnable(void) 
+{
+    CLCSELECTbits.SLCT = 1;
+    CLCnCONbits.INTP = 1;
+}
+
+void CLC2_RisingEdgeDetectionDisable(void) 
+{
+    CLCSELECTbits.SLCT = 1;
+    CLCnCONbits.INTP = 0;
+}
+
+void CLC2_FallingEdgeDetectionEnable(void) 
+{
+    CLCSELECTbits.SLCT = 1;
+    CLCnCONbits.INTN = 1;
+}
+
+void CLC2_FallingEdgeDetectionDisable(void) 
+{
+    CLCSELECTbits.SLCT = 1;
+    CLCnCONbits.INTN = 0;
+}
+
 
 void __interrupt(irq(CLC2),base(8)) CLC2_ISR()
 {   
@@ -95,7 +134,7 @@ static void CLC2_DefaultCLCI_ISR(void)
     //Use CLC2_CLCI_SetInterruptHandler() function to use custom ISR
 }
 
-bool CLC2_OutputStatusGet(void)
+bool CLC2_OutputStatusGet(void) 
 {
     return(CLCDATAbits.CLC2OUT);
 }

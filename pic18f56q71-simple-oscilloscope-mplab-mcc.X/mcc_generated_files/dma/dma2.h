@@ -5,13 +5,13 @@
  * 
  * @defgroup  dma2 DMA2
  * 
- * @brief This file contains the API prototypes for the DMA2 driver.
+ * @brief This file contains the API prototypes for the Direct Memory Access (DMA) driver.
  *
- * @version DMA2 Driver Version 2.11.0
+ * @version DMA2 Driver Version 2.12.1
  */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -39,6 +39,26 @@
 */
 #include <stdint.h>
 
+/**
+ * @ingroup dma2
+ * @name Classic API Name Macros
+ * Macros used to map the APIs to the deprecated API names:
+ */
+///@{
+#define DMA2_SelectSourceRegion            DMA2_SourceRegionSelect
+#define DMA2_SetSourceAddress              DMA2_SourceAddressSet
+#define DMA2_SetDestinationAddress         DMA2_DestinationAddressSet
+#define DMA2_SetSourceSize                 DMA2_SourceSizeSet
+#define DMA2_SetDestinationSize            DMA2_DestinationSizeSet
+#define DMA2_GetSourcePointer              DMA2_SourcePointerGet
+#define DMA2_GetDestinationPointer         DMA2_DestinationPointerGet
+#define DMA2_SetStartTrigger               DMA2_StartTriggerSet
+#define DMA2_SetAbortTrigger               DMA2_AbortTriggerSet
+#define DMA2_StartTransfer                 DMA2_TransferStart
+#define DMA2_StartTransferWithTrigger      DMA2_TransferWithTriggerStart
+#define DMA2_StopTransfer                  DMA2_TransferStop
+#define DMA2_SetDMAPriority                DMA2_DMAPrioritySet
+///@}
 
 /**
  * @ingroup dma2
@@ -50,11 +70,27 @@ void DMA2_Initialize(void);
 
 /**
  * @ingroup dma2
+ * @brief Enables the DMA2.
+ * @param None.
+ * @return None. 
+ */
+void DMA2_Enable(void);
+
+/**
+ * @ingroup dma2
+ * @brief Disables the DMA2.
+ * @param None.
+ * @return None. 
+ */
+void DMA2_Disable(void);
+
+/**
+ * @ingroup dma2
  * @brief Sets the source region.
  * @param [in] region - Desired source region.
  * @return None.
  */
-void DMA2_SelectSourceRegion(uint8_t region);
+void DMA2_SourceRegionSelect(uint8_t region);
 
 /**
  * @ingroup dma2
@@ -62,7 +98,15 @@ void DMA2_SelectSourceRegion(uint8_t region);
  * @param [in] address - Desired source address.
  * @return None.
  */
-void DMA2_SetSourceAddress(uint24_t address);
+void DMA2_SourceAddressSet(uint24_t address);
+
+/**
+ * @ingroup dma2
+ * @brief Returns the DMA Source Address.
+ * @param None.
+ * @return 24-bit DMA Source address.
+ */
+uint24_t DMA2_SourceAddressGet(void);
 
 /**
  * @ingroup dma2
@@ -70,7 +114,15 @@ void DMA2_SetSourceAddress(uint24_t address);
  * @param [in] address - Desired destination address.
  * @return None.
  */
-void DMA2_SetDestinationAddress(uint16_t address);
+void DMA2_DestinationAddressSet(uint16_t address);
+
+/**
+ * @ingroup dma2
+ * @brief Returns the DMA Destination Address.
+ * @param None.
+ * @return 16-bit DMA Destination address.
+ */
+uint16_t DMA2_DestinationAddressGet(void);
 
 /**
  * @ingroup dma2
@@ -78,7 +130,15 @@ void DMA2_SetDestinationAddress(uint16_t address);
  * @param [in] size - Size of the source array in bytes.
  * @return None.
  */
-void DMA2_SetSourceSize(uint16_t size);
+void DMA2_SourceSizeSet(uint16_t size);
+
+/**
+ * @ingroup dma2
+ * @brief Returns the DMA Source Message Size.
+ * @param None.
+ * @return 16-bit DMA Source message size value.
+ */
+uint16_t DMA2_SourceSizeGet(void);
 
 /**
  * @ingroup dma2
@@ -86,7 +146,15 @@ void DMA2_SetSourceSize(uint16_t size);
  * @param [in] size - Size of the destination array in bytes.
  * @return None.
  */
-void DMA2_SetDestinationSize(uint16_t size);
+void DMA2_DestinationSizeSet(uint16_t size);
+
+/**
+ * @ingroup dma2
+ * @brief Returns the DMA Destination Message Size.
+ * @param None.
+ * @return 16-bit DMA Destination message size value.
+ */
+uint16_t DMA2_DestinationSizeGet(void);
 
 /**
  * @ingroup dma2
@@ -94,7 +162,7 @@ void DMA2_SetDestinationSize(uint16_t size);
  * @param None.
  * @return Current address pointer to the source.
  */
-uint24_t DMA2_GetSourcePointer(void);
+uint24_t DMA2_SourcePointerGet(void);
 
 /**
  * @ingroup dma2
@@ -102,7 +170,23 @@ uint24_t DMA2_GetSourcePointer(void);
  * @param None.
  * @return Current address pointer to the destination.
  */
-uint16_t DMA2_GetDestinationPointer(void);
+uint16_t DMA2_DestinationPointerGet(void);
+
+/**
+ * @ingroup dma2
+ * @brief Returns the DMA Source Count value.
+ * @param None.
+ * @return Current 16-bit source counter value.
+ */
+uint16_t DMA2_SourceCountGet(void);
+
+/**
+ * @ingroup dma2
+ * @brief Returns the DMA Destination Count value.
+ * @param None.
+ * @return Current 16-bit destination counter value.
+ */
+uint16_t DMA2_DestinationCountGet(void);
 
 /**
  * @ingroup dma2
@@ -110,7 +194,7 @@ uint16_t DMA2_GetDestinationPointer(void);
  * @param [in] sirq - Start trigger source.
  * @return None.
  */
-void DMA2_SetStartTrigger(uint8_t sirq);
+void DMA2_StartTriggerSet(uint8_t sirq);
 
 /**
  * @ingroup dma2
@@ -118,7 +202,7 @@ void DMA2_SetStartTrigger(uint8_t sirq);
  * @param [in] airq - Abort trigger source.
  * @return None.
  */
-void DMA2_SetAbortTrigger(uint8_t airq);
+void DMA2_AbortTriggerSet(uint8_t airq);
 
 /**
  * @ingroup dma2
@@ -126,7 +210,7 @@ void DMA2_SetAbortTrigger(uint8_t airq);
  * @param None.
  * @return None.
  */
-void DMA2_StartTransfer(void);
+void DMA2_TransferStart(void);
 
 /**
  * @ingroup dma2
@@ -134,7 +218,7 @@ void DMA2_StartTransfer(void);
  * @param None.
  * @return None.
  */
-void DMA2_StartTransferWithTrigger(void);	
+void DMA2_TransferWithTriggerStart(void);	
 
 /**
  * @ingroup dma2
@@ -142,7 +226,7 @@ void DMA2_StartTransferWithTrigger(void);
  * @param None.
  * @return None.
  */
-void DMA2_StopTransfer(void);
+void DMA2_TransferStop(void);
 
 /**
  * @ingroup dma2
@@ -151,9 +235,6 @@ void DMA2_StopTransfer(void);
  * @return None.
  * NOTE: This function is dependent on the PR1WAY CONFIG bit.
  */
-void DMA2_SetDMAPriority(uint8_t priority);
-
-
-
+void DMA2_DMAPrioritySet(uint8_t priority);
 
 #endif //DMA2_H

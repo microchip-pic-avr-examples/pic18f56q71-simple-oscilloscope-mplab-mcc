@@ -5,13 +5,13 @@
  * 
  * @ingroup interrupt 
  * 
- * @brief This file contains the API implementation for the Interrupt Manager driver.
+ * @brief This file contains the API prototypes for the Interrupt Manager driver.
  * 
- * @version Interrupt Manager Driver Version 2.12
+ * @version Interrupt Manager Driver Version 2.0.4
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -33,7 +33,7 @@
 
 #include "../../system/interrupt.h"
 #include "../../system/system.h"
-#include <stdbool.h>
+#include "../pins.h"
 
 void (*INT0_InterruptHandler)(void);
 void (*INT1_InterruptHandler)(void);
@@ -41,28 +41,8 @@ void (*INT2_InterruptHandler)(void);
 
 void  INTERRUPT_Initialize (void)
 {
-    INTCON0bits.IPEN = 1;
-
-    bool state = (unsigned char)GIE;
-    GIE = 0;
-    IVTLOCK = 0x55;
-    IVTLOCK = 0xAA;
-    IVTLOCKbits.IVTLOCKED = 0x00; // unlock IVT
-
-    IVTBASEU = 0;
-    IVTBASEH = 0;
-    IVTBASEL = 8;
-
-    IVTLOCK = 0x55;
-    IVTLOCK = 0xAA;
-    IVTLOCKbits.IVTLOCKED = 0x01; // lock IVT
-
-    GIE = state;
-    // Assign peripheral interrupt priority vectors
-    IPR1bits.ADIP = 1;
-    IPR3bits.TMR2IP = 1;
-    IPR5bits.CLC2IP = 1;
-    IPR10bits.TMR4IP = 1;
+    // Disable Interrupt Priority Vectors (16CXXX Compatibility Mode)
+    INTCON0bits.IPEN = 0;
 
     // Clear the interrupt flag
     // Set the external interrupt edge detect
@@ -90,20 +70,7 @@ void  INTERRUPT_Initialize (void)
 
 }
 
-void __interrupt(irq(default),base(8)) Default_ISR()
-{
-}
-
-
-
-/**
- * @ingroup interrupt
- * @brief Executes whenever the signal on the INT0 pin transitions on the selected edge.
- * @pre INTERRUPT_Initialize() is already called.
- * @param None.
- * @return None.
- */
-void __interrupt(irq(INT0),base(8)) INT0_ISR()
+void INT0_ISR(void)
 {
     EXT_INT0_InterruptFlagClear();
 
@@ -129,15 +96,7 @@ void INT0_DefaultInterruptHandler(void){
     // add your INT0 interrupt custom code
     // or set custom function using INT0_SetInterruptHandler()
 }
-
-/**
- * @ingroup interrupt
- * @brief Executes whenever the signal on the INT1 pin transitions on the selected edge.
- * @pre INTERRUPT_Initialize() is already called.
- * @param None.
- * @return None.
- */
-void __interrupt(irq(INT1),base(8)) INT1_ISR()
+void INT1_ISR(void)
 {
     EXT_INT1_InterruptFlagClear();
 
@@ -163,15 +122,7 @@ void INT1_DefaultInterruptHandler(void){
     // add your INT1 interrupt custom code
     // or set custom function using INT1_SetInterruptHandler()
 }
-
-/**
- * @ingroup interrupt
- * @brief Executes whenever the signal on the INT2 pin transitions on the selected edge.
- * @pre INTERRUPT_Initialize() is already called.
- * @param None.
- * @return None.
- */
-void __interrupt(irq(INT2),base(8)) INT2_ISR()
+void INT2_ISR(void)
 {
     EXT_INT2_InterruptFlagClear();
 

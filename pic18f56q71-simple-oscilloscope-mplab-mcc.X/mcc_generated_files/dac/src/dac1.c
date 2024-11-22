@@ -5,12 +5,12 @@
  * 
  * @ingroup dac1
  * 
- * @brief This is the generated driver implementation file for the DAC1 driver using PIC10 / PIC12 / PIC16 / PIC18 MCUs
+ * @brief This is the generated driver implementation file for the DAC1 driver using PIC10/12/16/18 MCUs
  *
- * @version DAC1 Driver Version 2.1.0
+ * @version DAC1 Driver Version 2.1.1
 */
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -44,13 +44,13 @@
 void DAC1_Initialize(void) 
 { 
     //DACPSS FVR; DACNSS VSS; DACOE DACOUT1 and DACOUT2 are Disabled; DACEN enabled; 
-    DAC1CON =  136;
+    DAC1CON =  0x88;
 
     //DACR 3; 
-    DAC1DATH =  3;
+    DAC1DATH =  0x3;
 
     //DACR 232; 
-    DAC1DATL =  232;     
+    DAC1DATL =  0xE8;     
 }
 
 void DAC1_SetOutput(uint16_t inputData) 

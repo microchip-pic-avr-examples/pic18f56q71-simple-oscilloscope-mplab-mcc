@@ -7,10 +7,10 @@
  * 
  * @brief This file contains the API prototypes for the CLC2 driver.
  *
- * @version CLC2 Driver Version 1.0.1
+ * @version CLC2 Driver Version 1.2.0
 */
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -37,14 +37,63 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+
+
 /**
  * @ingroup clc2
- * @brief  Initializes the CLC2. This routine configures the CLC2 specific control registers.
+ * @brief  Initializes the CLC2 module. This routine configures the CLC2 specific control registers.
  * @param None.
  * @return None.
- * 
  */
 void CLC2_Initialize(void);
+
+/**
+ * @ingroup clc2
+ * @brief Enables the CLC2 module.     
+ * @param None.
+ * @return None.
+ */
+void CLC2_Enable(void);
+
+/**
+ * @ingroup clc2
+ * @brief Disables the CLC2 module.     
+ * @param None.
+ * @return None.
+ */
+void CLC2_Disable(void);
+
+/**
+ * @ingroup clc2
+ * @brief Enabes Rising Edge Detection  on CLC2 output for the CLC2 module.     
+ * @param None.
+ * @return None.
+ */
+void CLC2_RisingEdgeDetectionEnable(void);
+
+/**
+ * @ingroup clc2
+ * @brief Disables Rising Edge Detection  on CLC2 output for the CLC2 module.     
+ * @param None.
+ * @return None.
+ */
+void CLC2_RisingEdgeDetectionDisable(void);
+
+/**
+ * @ingroup clc2
+ * @brief Enables Falling Edge Detection  on CLC2 output for the CLC2 module.     
+ * @param None.
+ * @return None.
+ */
+void CLC2_FallingEdgeDetectionEnable(void);
+
+/**
+ * @ingroup clc2
+ * @brief Disables Falling Edge Detection on CLC2 output for the CLC2 module.     
+ * @param None.
+ * @return None.
+ */
+void CLC2_FallingEdgeDetectionDisable(void);
 
 /**
  * @ingroup clc
@@ -56,12 +105,14 @@ void CLC2_CLCI_SetInterruptHandler(void (* InterruptHandler)(void));
 
 /**
  * @ingroup clc2
- * @brief Returns the output pin status of the CLC module.
+ * @brief Returns the output pin status of the CLC2 module.
  * @param  None.
- * @retval True - Output is 1.
- * @retval False - Output is 0.
+ * @retval True - Output is 1
+ * @retval False - Output is 0
  */
-bool CLC2_OutputStatusGet(void);
+bool CLC2_OutputStatusGet(void); 
+
+
 
 #endif  // CLC2_H
 /**

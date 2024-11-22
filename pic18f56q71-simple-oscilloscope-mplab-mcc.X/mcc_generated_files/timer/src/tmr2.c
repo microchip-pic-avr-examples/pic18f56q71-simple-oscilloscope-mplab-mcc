@@ -5,13 +5,15 @@
  * 
  * @ingroup  tmr2
  * 
- * @brief API implementations for the TMR2 module.
+ * @brief Driver implementation for the TMR2 module.
  *
- * @version TMR2 Driver Version 3.0.1
+ * @version Driver Version 4.0.0
+ *
+ * @version Package Version 5.0.0
  */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -39,106 +41,126 @@
 #include "../tmr2.h"
 #include "../../system/interrupt.h"
 
-const struct TMR_INTERFACE Timer2 = {
-    .Initialize = Timer2_Initialize,
-    .Start = Timer2_Start,
-    .Stop = Timer2_Stop,
-    .PeriodCountSet = Timer2_PeriodCountSet,
-    .TimeoutCallbackRegister = Timer2_OverflowCallbackRegister,
-    .Tasks = NULL
-};
-
-static void (*Timer2_OverflowCallback)(void);
-static void Timer2_DefaultOverflowCallback(void);
+static void (*TMR2_PeriodMatchCallback)(void);
+static void TMR2_DefaultPeriodMatchCallback(void);
 
 /**
   Section: TMR2 APIs
 */
 
-void Timer2_Initialize(void){
+void TMR2_Initialize(void)
+{
+    T2CLKCON = (5 << _T2CLKCON_T2CS_POSN);  // T2CS MFINTOSC_500KHz
 
-    // Set TMR2 to the options selected in the User Interface
-    // TCS MFINTOSC_500KHz; 
-    T2CLKCON = 0x5;
-    // TMODE Starts on rising edge on TMR2_ers; TCKSYNC Not Synchronized; TCKPOL Rising Edge; TPSYNC Not Synchronized; 
-    T2HLT = 0x11;
-    // TRSEL TMR4_postscaled; 
-    T2RST = 0x2;
-    // PR 9; 
-    T2PR = 0x9;
-    // TMR 0x0; 
+    T2HLT = (17 << _T2HLT_T2MODE_POSN)   // T2MODE Starts on rising edge on TMR2_ers
+        | (0 << _T2HLT_T2CKSYNC_POSN)   // T2CKSYNC Not Synchronized
+        | (0 << _T2HLT_T2CKPOL_POSN)   // T2CKPOL Rising Edge
+        | (0 << _T2HLT_T2PSYNC_POSN);  // T2PSYNC Not Synchronized
+
+    T2RST = (2 << _T2RST_T2RSEL_POSN);  // T2RSEL TMR4_postscaled
+
+    T2PR = 0x9;    // Period 0.00002s; Frequency 500000Hz; Count 9
+
     T2TMR = 0x0;
 
-    // Set default overflow callback
-    Timer2_OverflowCallbackRegister(Timer2_DefaultOverflowCallback);
+    TMR2_PeriodMatchCallback = TMR2_DefaultPeriodMatchCallback;
+    
+    PIR3bits.TMR2IF = 0;   
+    PIE3bits.TMR2IE = 1;
 
-    // Clearing IF flag before enabling the interrupt.
-     PIR3bits.TMR2IF = 0;
-    // Enabling TMR2 interrupt.
-     PIE3bits.TMR2IE = 1;
-    // TCKPS 1:1; TMRON on; TOUTPS 1:1; 
-    T2CON = 0x80;
+    T2CON = (0 << _T2CON_T2CKPS_POSN)   // T2CKPS 1:1
+        | (1 << _T2CON_TMR2ON_POSN)   // TMR2ON on
+        | (0 << _T2CON_T2OUTPS_POSN);  // T2OUTPS 1:1
 }
 
-void Timer2_ModeSet(Timer2_HLT_MODE mode)
+void TMR2_Deinitialize(void)
 {
-   // Configure different types HLT mode
-    T2HLTbits.T2MODE = mode;
+    T2CONbits.TMR2ON = 0;
+    
+    PIR3bits.TMR2IF = 0;	   
+    PIE3bits.TMR2IE = 0;		
+    
+    T2CON = 0x0;
+    T2CLKCON = 0x0;
+    T2HLT = 0x0;
+    T2RST = 0x0;
+    T2PR = 0xFF;
+    T2TMR =0x0;
 }
 
-void Timer2_ExtResetSourceSet(Timer2_HLT_EXT_RESET_SOURCE reset)
-{
-    //Configure different types of HLT external reset source
-    T2RSTbits.T2RSEL = reset;
-}
-
-void Timer2_Start(void)
-{
-    // Start the Timer by writing to TMRxON bit
+void TMR2_Start(void)
+{   
     T2CONbits.TMR2ON = 1;
 }
 
-void Timer2_Stop(void)
-{
-    // Stop the Timer by writing to TMRxON bit
+void TMR2_Stop(void)
+{   
     T2CONbits.TMR2ON = 0;
 }
 
-uint8_t Timer2_Read(void)
-{
-    uint8_t readVal;
-    readVal = TMR2;
-    return readVal;
+void TMR2_ModeSet(TMR2_HLT_MODE mode)
+{  
+    T2HLTbits.T2MODE = mode;
 }
 
-void Timer2_Write(uint8_t timerVal)
-{
-    // Write to the Timer2 register
-    TMR2 = timerVal;;
+void TMR2_ExtResetSourceSet(TMR2_HLT_EXT_RESET_SOURCE reset)
+{   
+    T2RSTbits.T2RSEL = reset;
 }
 
-void Timer2_PeriodCountSet(size_t periodVal)
+uint8_t TMR2_CounterGet(void)
 {
-   PR2 = (uint8_t) periodVal;
+    return T2TMR;
 }
 
-void __interrupt(irq(TMR2),base(8)) Timer2_ISR()
-{
-    // clear the TMR2 interrupt flag
-     PIR3bits.TMR2IF = 0;
+void TMR2_CounterSet(uint8_t count)
+{  
+    T2TMR = count;
+}
 
-    if(Timer2_OverflowCallback)
+void TMR2_PeriodSet(uint8_t periodVal)
+{
+    T2PR = periodVal;
+}
+
+uint8_t TMR2_PeriodGet(void)
+{
+    return T2PR;
+}
+
+uint8_t TMR2_MaxCountGet(void)
+{
+    return TMR2_MAX_COUNT;
+}
+
+void TMR2_TMRInterruptEnable(void)
+{
+    PIE3bits.TMR2IE = 1;
+}
+
+void TMR2_TMRInterruptDisable(void)
+{
+    PIE3bits.TMR2IE = 0;
+}
+
+void __interrupt(irq(TMR2),base(8)) TMR2_ISR(void)
+{
+    // The ticker is set to 1 -> The callback function gets called every time this ISR executes.
+    if(NULL != TMR2_PeriodMatchCallback)
     {
-        Timer2_OverflowCallback();
+        TMR2_PeriodMatchCallback();
     }
+   PIR3bits.TMR2IF = 0;
 }
 
-void Timer2_OverflowCallbackRegister(void (* InterruptHandler)(void)){
-    Timer2_OverflowCallback = InterruptHandler;
+void TMR2_PeriodMatchCallbackRegister(void (* callbackHandler)(void))
+{
+   TMR2_PeriodMatchCallback = callbackHandler;
 }
 
-static void Timer2_DefaultOverflowCallback(void){
-    // add your TMR2 interrupt custom code
-    // or set custom function using Timer2_OverflowCallbackRegister()
+static void TMR2_DefaultPeriodMatchCallback(void)
+{
+    // Default callback function
 }
+
 

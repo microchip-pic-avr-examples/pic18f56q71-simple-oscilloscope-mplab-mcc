@@ -5,12 +5,14 @@
  * 
  * @defgroup systemdriver System Driver
  * 
- * @brief This is the generated header file for the System driver.
+ * @brief This file contains the API prototype for the System Driver.
  *
- * @version Driver Version 1.0.1
+ * @version Driver Version 1.0.3
+ *
+ * @version Package Version 1.0.4
 */
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -37,9 +39,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "config_bits.h"
-#include "../system/clock.h"
 #include "../system/pins.h"
-#include "../adc/adc.h"
 #include "../clc/clc1.h"
 #include "../clc/clc2.h"
 #include "../dac/dac1.h"
@@ -48,10 +48,12 @@
 #include "../fvr/fvr.h"
 #include "../nco/nco1.h"
 #include "../opa/opa1.h"
-#include "../timer/tmr2.h"
-#include "../timer/tmr4.h"
 #include "../uart/uart2.h"
 #include "../system/interrupt.h"
+#include "../system/clock.h"
+#include "../adc/adc.h"
+#include "../timer/tmr2.h"
+#include "../timer/tmr4.h"
 
 /**
  * @ingroup systemdriver

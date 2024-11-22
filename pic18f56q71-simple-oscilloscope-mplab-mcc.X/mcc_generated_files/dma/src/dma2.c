@@ -7,11 +7,11 @@
  * 
  * @brief This file contains the API implementations for the DMA2 driver.
  *
- * @version DMA2 Driver Version 2.11.0
+ * @version DMA2 Driver Version 2.12.1
  */ 
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -49,8 +49,8 @@ void DMA2_Initialize(void)
     DMASELECT = 0x1;
     //Source Address : 0x1400
     DMAnSSA = 0x1400;
-    //Destination Address : &DAC1DATL
-    DMAnDSA = &DAC1DATL;
+    //Destination Address : (uint16_t) &DAC1DATL
+    DMAnDSA = (uint16_t) &DAC1DATL;
     //SSTP not cleared; SMODE decremented; SMR Program Flash; DSTP not cleared; DMODE incremented; 
     DMAnCON1 = 0x4C;
     //Source Message Size : 1024
@@ -76,86 +76,136 @@ void DMA2_Initialize(void)
     PIE6bits.DMA2AIE = 0;
     PIE6bits.DMA2ORIE = 0;
 	
-    //AIRQEN enabled; DGO not in progress; SIRQEN enabled; EN enabled; 
-    DMAnCON0 = 0xC4;
+    //AIRQEN disabled; DGO not in progress; SIRQEN enabled; EN enabled; 
+    DMAnCON0 = 0xC0;
 	 
 }
 
-void DMA2_SelectSourceRegion(uint8_t region)
+void DMA2_Enable(void)
+{
+    DMASELECT = 0x1;
+    DMAnCON0bits.EN = 0x1;
+}
+
+void DMA2_Disable(void)
+{
+    DMASELECT = 0x1;
+    DMAnCON0bits.EN = 0x0;
+}
+
+void DMA2_SourceRegionSelect(uint8_t region)
 {
     DMASELECT = 0x1;
 	DMAnCON1bits.SMR  = region;
 }
 
-void DMA2_SetSourceAddress(uint24_t address)
+void DMA2_SourceAddressSet(uint24_t address)
 {
     DMASELECT = 0x1;
 	DMAnSSA = address;
 }
 
-void DMA2_SetDestinationAddress(uint16_t address)
+uint24_t DMA2_SourceAddressGet(void)
+{
+    DMASELECT = 0x1;
+    return DMAnSSA;
+}
+
+void DMA2_DestinationAddressSet(uint16_t address)
 {
     DMASELECT = 0x1;
 	DMAnDSA = address;
 }
 
-void DMA2_SetSourceSize(uint16_t size)
+uint16_t DMA2_DestinationAddressGet(void)
+{
+    DMASELECT = 0x1;
+    return DMAnDSA;
+}
+
+void DMA2_SourceSizeSet(uint16_t size)
 {
     DMASELECT = 0x1;
 	DMAnSSZ= size;
 }
 
-void DMA2_SetDestinationSize(uint16_t size)
+uint16_t DMA2_SourceSizeGet(void)
+{
+    DMASELECT = 0x1;
+    return DMAnSSZ;
+}
+
+void DMA2_DestinationSizeSet(uint16_t size)
 {                     
     DMASELECT = 0x1;
 	DMAnDSZ= size;
 }
 
-uint24_t DMA2_GetSourcePointer(void)
+uint16_t DMA2_DestinationSizeGet(void)
+{                     
+    DMASELECT = 0x1;
+    return DMAnDSZ;
+}
+
+uint24_t DMA2_SourcePointerGet(void)
 {
     DMASELECT = 0x1;
 	return DMAnSPTR;
 }
 
-uint16_t DMA2_GetDestinationPointer(void)
+uint16_t DMA2_DestinationPointerGet(void)
 {
     DMASELECT = 0x1;
 	return DMAnDPTR;
 }
 
-void DMA2_SetStartTrigger(uint8_t sirq)
+uint16_t DMA2_SourceCountGet(void)
+{
+    DMASELECT = 0x1;
+    return DMAnSCNT;
+}
+
+uint16_t DMA2_DestinationCountGet(void)
+{                     
+    DMASELECT = 0x1;
+    return DMAnDCNT;
+}
+
+void DMA2_StartTriggerSet(uint8_t sirq)
 {
     DMASELECT = 0x1;
 	DMAnSIRQ = sirq;
 }
 
-void DMA2_SetAbortTrigger(uint8_t airq)
+void DMA2_AbortTriggerSet(uint8_t airq)
 {
     DMASELECT = 0x1;
 	DMAnAIRQ = airq;
 }
 
-void DMA2_StartTransfer(void)
+void DMA2_TransferStart(void)
 {
     DMASELECT = 0x1;
 	DMAnCON0bits.DGO = 1;
 }
 
-void DMA2_StartTransferWithTrigger(void)
+void DMA2_TransferWithTriggerStart(void)
 {
     DMASELECT = 0x1;
 	DMAnCON0bits.SIRQEN = 1;
 }
 
-void DMA2_StopTransfer(void)
+void DMA2_TransferStop(void)
 {
     DMASELECT = 0x1;
 	DMAnCON0bits.SIRQEN = 0; 
 	DMAnCON0bits.DGO = 0;
 }
 
-void DMA2_SetDMAPriority(uint8_t priority)
+void DMA2_DMAPrioritySet(uint8_t priority)
 {
+    uint8_t GIESaveState = INTCON0bits.GIE;
+    INTCON0bits.GIE = 0;
 	PRLOCK = 0x55;
 	PRLOCK = 0xAA;
 	PRLOCKbits.PRLOCKED = 0;
@@ -163,6 +213,7 @@ void DMA2_SetDMAPriority(uint8_t priority)
 	PRLOCK = 0x55;
 	PRLOCK = 0xAA;
 	PRLOCKbits.PRLOCKED = 1;
+    INTCON0bits.GIE = GIESaveState;
 }
 
 /**

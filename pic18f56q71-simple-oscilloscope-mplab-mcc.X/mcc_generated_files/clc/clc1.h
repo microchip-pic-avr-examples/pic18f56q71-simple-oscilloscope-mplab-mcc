@@ -7,10 +7,10 @@
  * 
  * @brief This file contains the API prototypes for the CLC1 driver.
  *
- * @version CLC1 Driver Version 1.0.1
+ * @version CLC1 Driver Version 1.2.0
 */
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -37,24 +37,90 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+
+
 /**
  * @ingroup clc1
- * @brief  Initializes the CLC1. This routine configures the CLC1 specific control registers.
+ * @brief  Initializes the CLC1 module. This routine configures the CLC1 specific control registers.
  * @param None.
  * @return None.
- * 
  */
 void CLC1_Initialize(void);
 
+/**
+ * @ingroup clc1
+ * @brief Enables the CLC1 module.     
+ * @param None.
+ * @return None.
+ */
+void CLC1_Enable(void);
 
 /**
  * @ingroup clc1
- * @brief Returns the output pin status of the CLC module.
- * @param  None.
- * @retval True - Output is 1.
- * @retval False - Output is 0.
+ * @brief Disables the CLC1 module.     
+ * @param None.
+ * @return None.
  */
-bool CLC1_OutputStatusGet(void);
+void CLC1_Disable(void);
+
+/**
+ * @ingroup clc1
+ * @brief Enabes Rising Edge Detection  on CLC1 output for the CLC1 module.     
+ * @param None.
+ * @return None.
+ */
+void CLC1_RisingEdgeDetectionEnable(void);
+
+/**
+ * @ingroup clc1
+ * @brief Disables Rising Edge Detection  on CLC1 output for the CLC1 module.     
+ * @param None.
+ * @return None.
+ */
+void CLC1_RisingEdgeDetectionDisable(void);
+
+/**
+ * @ingroup clc1
+ * @brief Enables Falling Edge Detection  on CLC1 output for the CLC1 module.     
+ * @param None.
+ * @return None.
+ */
+void CLC1_FallingEdgeDetectionEnable(void);
+
+/**
+ * @ingroup clc1
+ * @brief Disables Falling Edge Detection on CLC1 output for the CLC1 module.     
+ * @param None.
+ * @return None.
+ */
+void CLC1_FallingEdgeDetectionDisable(void);
+
+
+/**
+ * @ingroup clc1
+ * @brief Returns the output pin status of the CLC1 module.
+ * @param  None.
+ * @retval True - Output is 1
+ * @retval False - Output is 0
+ */
+bool CLC1_OutputStatusGet(void); 
+
+/**
+ * @ingroup clc1
+ * @brief Setter function for the CLC1 callback.
+ * @param CallbackHandler - Pointer to the custom callback
+ * @return None.
+ */
+ void CLC1_CallbackRegister(void (* CallbackHandler)(void));
+
+/**
+ * @ingroup clc1
+ * @brief Performs tasks to be executed on rising edge or falling edge event in Polling mode.
+ * @param None.
+ * @return None.
+ */
+void CLC1_Tasks(void);
+
 
 #endif  // CLC1_H
 /**

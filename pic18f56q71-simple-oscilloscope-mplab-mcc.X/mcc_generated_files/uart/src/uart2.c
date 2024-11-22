@@ -5,13 +5,13 @@
  * 
  * @ingroup uart2
  * 
- * @brief This is the generated driver implementation file for the UART2 driver using CCL
+ * @brief This is the generated driver implementation file for the UART2 driver using the Universal Asynchronous Receiver and Transmitter (UART) module.
  *
- * @version UART2 Driver Version 3.0.3
+ * @version UART2 Driver Version 3.0.7
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -74,15 +74,20 @@ const uart_drv_interface_t UART2 = {
 /**
   Section: UART2 variables
 */
-volatile uart2_status_t uart2RxLastError;
+ /**
+ * @misradeviation{@advisory,19.2}
+ * The UART error status necessitates checking the bitfield and accessing the status within the group byte therefore the use of a union is essential.
+ */
+ /* cppcheck-suppress misra-c2012-19.2 */
+static volatile uart2_status_t uart2RxLastError;
 
 /**
   Section: UART2 APIs
 */
 
-void (*UART2_FramingErrorHandler)(void);
-void (*UART2_OverrunErrorHandler)(void);
-void (*UART2_ParityErrorHandler)(void);
+static void (*UART2_FramingErrorHandler)(void);
+static void (*UART2_OverrunErrorHandler)(void);
+static void (*UART2_ParityErrorHandler)(void);
 
 static void UART2_DefaultFramingErrorCallback(void);
 static void UART2_DefaultOverrunErrorCallback(void);
@@ -118,10 +123,10 @@ void UART2_Initialize(void)
     //BRGH 0; 
     U2BRGH = 0x0; 
     //TXBE empty; STPMD in middle of first Stop bit; TXWRE No error; 
-    U2FIFO = 0x20; 
+    U2FIFO = 0x2E; 
     //ABDIE disabled; ABDIF Auto-baud not enabled or not complete; WUIF WUE not enabled by software; 
     U2UIR = 0x0; 
-    //TXCIF equal; RXFOIF not overflowed; RXBKIF No Break detected; FERIF no error; CERIF No Checksum error; ABDOVF Not overflowed; PERIF Byte not at top; TXMTIF empty; 
+    //TXCIF equal; RXFOIF not overflowed; RXBKIF No Break detected; FERIF no error; CERIF No Checksum error; ABDOVF Not overflowed; PERIF no parity error; TXMTIF empty; 
     U2ERRIR = 0x80; 
     //TXCIE disabled; RXFOIE disabled; RXBKIE disabled; FERIE disabled; CERIE disabled; ABDOVE disabled; PERIE disabled; TXMTIE disabled; 
     U2ERRIE = 0x0; 
@@ -151,47 +156,47 @@ void UART2_Deinitialize(void)
     U2ERRIE = 0x00;
 }
 
-inline void UART2_Enable(void)
+void UART2_Enable(void)
 {
     U2CON1bits.ON = 1; 
 }
 
-inline void UART2_Disable(void)
+void UART2_Disable(void)
 {
     U2CON1bits.ON = 0; 
 }
 
-inline void UART2_TransmitEnable(void)
+void UART2_TransmitEnable(void)
 {
     U2CON0bits.TXEN = 1;
 }
 
-inline void UART2_TransmitDisable(void)
+void UART2_TransmitDisable(void)
 {
     U2CON0bits.TXEN = 0;
 }
 
-inline void UART2_ReceiveEnable(void)
+void UART2_ReceiveEnable(void)
 {
     U2CON0bits.RXEN = 1;
 }
 
-inline void UART2_ReceiveDisable(void)
+void UART2_ReceiveDisable(void)
 {
     U2CON0bits.RXEN = 0;
 }
 
-inline void UART2_SendBreakControlEnable(void)
+void UART2_SendBreakControlEnable(void)
 {
     U2CON1bits.SENDB = 1;
 }
 
-inline void UART2_SendBreakControlDisable(void)
+void UART2_SendBreakControlDisable(void)
 {
     U2CON1bits.SENDB = 0;
 }
 
-inline void UART2_AutoBaudSet(bool enable)
+void UART2_AutoBaudSet(bool enable)
 {
     if(enable)
     {
@@ -204,22 +209,22 @@ inline void UART2_AutoBaudSet(bool enable)
 }
 
 
-inline bool UART2_AutoBaudQuery(void)
+bool UART2_AutoBaudQuery(void)
 {
     return (bool)U2UIRbits.ABDIF; 
 }
 
-inline void UART2_AutoBaudDetectCompleteReset(void)
+void UART2_AutoBaudDetectCompleteReset(void)
 {
     U2UIRbits.ABDIF = 0; 
 }
 
-inline bool UART2_IsAutoBaudDetectOverflow(void)
+bool UART2_IsAutoBaudDetectOverflow(void)
 {
     return (bool)U2ERRIRbits.ABDOVF; 
 }
 
-inline void UART2_AutoBaudDetectOverflowReset(void)
+void UART2_AutoBaudDetectOverflowReset(void)
 {
     U2ERRIRbits.ABDOVF = 0; 
 }
@@ -243,7 +248,7 @@ size_t UART2_ErrorGet(void)
 {
     uart2RxLastError.status = 0;
     
-    if(U2ERRIRbits.FERIF)
+    if(true == U2ERRIRbits.FERIF)
     {
         uart2RxLastError.ferr = 1;
         if(NULL != UART2_FramingErrorHandler)
@@ -251,12 +256,20 @@ size_t UART2_ErrorGet(void)
             UART2_FramingErrorHandler();
         }  
     }
-    if(U2ERRIRbits.RXFOIF)
+    if(true == U2ERRIRbits.RXFOIF)
     {
         uart2RxLastError.oerr = 1;
         if(NULL != UART2_OverrunErrorHandler)
         {
             UART2_OverrunErrorHandler();
+        }   
+    }
+    if(true == U2ERRIRbits.PERIF)
+    {
+        uart2RxLastError.perr = 1;
+        if(NULL != UART2_ParityErrorHandler)
+        {
+            UART2_ParityErrorHandler();
         }   
     }
 

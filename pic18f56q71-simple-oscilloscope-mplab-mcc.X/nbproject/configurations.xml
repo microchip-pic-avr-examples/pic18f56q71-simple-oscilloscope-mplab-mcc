@@ -9,6 +9,7 @@
                      projectFiles="true">
         <logicalFolder name="adc" displayName="adc" projectFiles="true">
           <itemPath>mcc_generated_files/adc/adc.h</itemPath>
+          <itemPath>mcc_generated_files/adc/adc_types.h</itemPath>
         </logicalFolder>
         <logicalFolder name="clc" displayName="clc" projectFiles="true">
           <itemPath>mcc_generated_files/clc/clc2.h</itemPath>
@@ -38,9 +39,10 @@
           <itemPath>mcc_generated_files/system/interrupt.h</itemPath>
         </logicalFolder>
         <logicalFolder name="timer" displayName="timer" projectFiles="true">
-          <itemPath>mcc_generated_files/timer/timer_interface.h</itemPath>
           <itemPath>mcc_generated_files/timer/tmr2.h</itemPath>
           <itemPath>mcc_generated_files/timer/tmr4.h</itemPath>
+          <itemPath>mcc_generated_files/timer/tmr2_deprecated.h</itemPath>
+          <itemPath>mcc_generated_files/timer/tmr4_deprecated.h</itemPath>
         </logicalFolder>
         <logicalFolder name="uart" displayName="uart" projectFiles="true">
           <itemPath>mcc_generated_files/uart/uart_drv_interface.h</itemPath>
@@ -140,7 +142,7 @@
         <targetDevice>PIC18F56Q71</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>noID</platformTool>
+        <platformTool>nEdbgTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>3.00</languageToolchainVersion>
         <platform>3</platform>
@@ -387,7 +389,7 @@
         <targetDevice>PIC18F56Q71</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>noID</platformTool>
+        <platformTool>nEdbgTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>3.00</languageToolchainVersion>
         <platform>3</platform>

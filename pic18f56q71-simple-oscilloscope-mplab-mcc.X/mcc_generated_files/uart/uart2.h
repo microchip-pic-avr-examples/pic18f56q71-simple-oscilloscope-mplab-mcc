@@ -5,12 +5,12 @@
  * 
  * @defgroup uart2 UART2
  * 
- * @brief This file contains API prototypes and other datatypes for UART2 module.
+ * @brief This file contains API prototypes and other data types for the the Universal Asynchronous Receiver and Transmitter (UART) module.
  *
- * @version UART2 Driver Version 3.0.3
+ * @version UART2 Driver Version 3.0.7
 */
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -33,13 +33,9 @@
 #ifndef UART2_H
 #define UART2_H
 
-/**
-  Section: Included Files
- */
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <stdio.h>
 #include "../system/system.h"
 #include "uart_drv_interface.h"
 
@@ -51,39 +47,16 @@
 
 #define UART2_interface UART2
 
-
-#define UART2_Initialize     UART2_Initialize
-#define UART2_Deinitialize   UART2_Deinitialize
-#define UART2_Write          UART2_Write
-#define UART2_Read           UART2_Read
-#define UART2__IsRxReady     UART2_IsRxReady
-#define UART2_IsTxReady      UART2_IsTxReady
-#define UART2_IsTxDone       UART2_IsTxDone
-
-#define UART2_TransmitEnable       UART2_TransmitEnable
-#define UART2_TransmitDisable      UART2_TransmitDisable
-#define UART2_AutoBaudSet          UART2_AutoBaudSet
-#define UART2_AutoBaudQuery        UART2_AutoBaudQuery
-#define UART2_BRGCountSet               (NULL)
-#define UART2_BRGCountGet               (NULL)
-#define UART2_BaudRateSet               (NULL)
-#define UART2_BaudRateGet               (NULL)
-#define UART2__AutoBaudEventEnableGet   (NULL)
-#define UART2_ErrorGet             UART2_ErrorGet
-
-#define UART2_TxCompleteCallbackRegister     (NULL)
-#define UART2_RxCompleteCallbackRegister      (NULL)
-#define UART2_TxCollisionCallbackRegister  (NULL)
-#define UART2_FramingErrorCallbackRegister UART2_FramingErrorCallbackRegister
-#define UART2_OverrunErrorCallbackRegister UART2_OverrunErrorCallbackRegister
-#define UART2_ParityErrorCallbackRegister  UART2_ParityErrorCallbackRegister
-#define UART2_EventCallbackRegister        (NULL)
-
 /**
  @ingroup uart2
  @struct uart2_status_t
- @breif This is an instance of UART2_STATUS for UART2 module
+ @brief This is a structure defined for errors in reception of data.
  */
+ /**
+ * @misradeviation{@advisory,19.2}
+ * The UART error status necessitates checking the bitfield and accessing the status within the group byte therefore the use of a union is essential.
+ */
+ /* cppcheck-suppress misra-c2012-19.2 */
 typedef union {
     struct {
         uint8_t perr : 1;     /**<This is a bit field for Parity Error status*/
@@ -94,9 +67,6 @@ typedef union {
     size_t status;            /**<Group byte for status errors*/
 }uart2_status_t;
 
-/**
- Section: Data Type Definitions
- */
 
 /**
  * @ingroup uart2
@@ -106,10 +76,8 @@ extern const uart_drv_interface_t UART2;
 
 /**
  * @ingroup uart2
- * @brief This API initializes the UART2 driver.
- *        This routine initializes the UART2 module.
- *        This routine must be called before any other UART2 routine is called.
- *        This routine should only be called once during system initialization.
+ * @brief Initializes the UART2 module. This routine is called
+ *        only once during system initialization, before calling other APIs.
  * @param None.
  * @return None.
  */
@@ -117,8 +85,8 @@ void UART2_Initialize(void);
 
 /**
  * @ingroup uart2
- * @brief This API Deinitializes the UART2 driver.
- *        This routine disables the UART2 module.
+ * @brief Deinitializes and disables the UART2 module.
+
  * @param None.
  * @return None.
  */
@@ -126,191 +94,192 @@ void UART2_Deinitialize(void);
 
 /**
  * @ingroup uart2
- * @brief This API enables the UART2 module.     
+ * @brief Enables the UART2 module.     
  * @param None.
  * @return None.
  */
-inline void UART2_Enable(void);
+void UART2_Enable(void);
 
 /**
  * @ingroup uart2
- * @brief This API disables the UART2 module.
+ * @brief Disables the UART2 module.
  * @param None.
  * @return None.
  */
-inline void UART2_Disable(void);
+void UART2_Disable(void);
 
 /**
  * @ingroup uart2
- * @brief This API enables the UART2 transmitter.
- *        UART2 should also be enable to send bytes over TX pin.
+ * @brief Enables the UART2 transmitter. 
+ *        The UART2 must be enabled to send the bytes over to the TX pin.
  * @param None.
  * @return None.
  */
-inline void UART2_TransmitEnable(void);
+void UART2_TransmitEnable(void);
 
 /**
  * @ingroup uart2
- * @brief This API disables the UART2 transmitter.
+ * @brief Disables the UART2 transmitter.
  * @param None.
  * @return None.
  */
-inline void UART2_TransmitDisable(void);
+void UART2_TransmitDisable(void);
 
 /**
  * @ingroup uart2
- * @brief This API enables the UART2 Receiver.
- *        UART2 should also be enable to receive bytes over RX pin.
+ * @brief Enables the UART2 receiver.
+ *        The UART2 must be enabled to receive the bytes sent by the RX pin.
  * @param None.
  * @return None.
  */
-inline void UART2_ReceiveEnable(void);
+void UART2_ReceiveEnable(void);
 
 /**
  * @ingroup uart2
- * @brief This API disables the UART2 Receiver.
+ * @brief Disables the UART2 receiver.
  * @param None.
  * @return None.
  */
-inline void UART2_ReceiveDisable(void);
+void UART2_ReceiveDisable(void);
 
 /**
  * @ingroup uart2
- * @brief This API enables the UART2 send break control.
+ * @brief Enables the UART2 to send a break control.
  * @param None.
  * @return None.
  */
-inline void UART2_SendBreakControlEnable(void);
+void UART2_SendBreakControlEnable(void);
 
 /**
  * @ingroup uart2
- * @brief This API disables the UART2 send break control.
+ * @brief Disables the UART2 Send Break Control bit.
  * @param None.
  * @return None.
  */
-inline void UART2_SendBreakControlDisable(void);
+void UART2_SendBreakControlDisable(void);
 
 /**
  * @ingroup uart2
- * @brief This API enables the UART2 AutoBaud Detection.
- * @param bool enable.
+ * @brief Enables the UART2 Auto-Baud Detection (ABR).
+ * @param bool enable
  * @return None.
  */
-inline void UART2_AutoBaudSet(bool enable);
+void UART2_AutoBaudSet(bool enable);
 
 
 /**
  * @ingroup uart2
- * @brief This API reads the UART2 AutoBaud Detection Complete bit.
+ * @brief Reads the UART2 Auto-Baud Detection Complete bit.
  * @param None.
  * @return None.
  */
-inline bool UART2_AutoBaudQuery(void);
+bool UART2_AutoBaudQuery(void);
 
 /**
  * @ingroup uart2
- * @brief This API Reset the UART2 AutoBaud Detection Complete bit.
+ * @brief Resets the UART2 Auto-Baud Detection Complete bit.
  * @param None.
  * @return None.
  */
-inline void UART2_AutoBaudDetectCompleteReset(void);
+void UART2_AutoBaudDetectCompleteReset(void);
 
 /**
  * @ingroup uart2
- * @brief This API reads the UART2 AutoBaud Detection overflow bit.
+ * @brief Reads the UART2 Auto-Baud Detection Overflow bit.
  * @param None.
  * @return None.
  */
-inline bool UART2_IsAutoBaudDetectOverflow(void);
+bool UART2_IsAutoBaudDetectOverflow(void);
 
 /**
  * @ingroup uart2
- * @brief This API Reset the UART2 AutoBaud Detection Overflow bit.
+ * @brief Resets the UART2 Auto-Baud Detection Overflow bit.
  * @param None.
  * @return None.
  */
-inline void UART2_AutoBaudDetectOverflowReset(void);
+void UART2_AutoBaudDetectOverflowReset(void);
 
 /**
  * @ingroup uart2
- * @brief This API checks if UART2 receiver has received data and ready to be read.
+ * @brief Checks if the UART2 receiver has received data and is ready to be read.
  * @param None.
- * @retval true if UART2 receiver FIFO has a data
- * @retval false UART2 receiver FIFO is empty
+ * @retval True - UART2 receiver FIFO has data
+ * @retval False - UART2 receiver FIFO is empty
  */
 bool UART2_IsRxReady(void);
 
 /**
  * @ingroup uart2
- * @brief This function checks if UART2 transmitter is ready to accept a data byte.
+ * @brief Checks if the UART2 transmitter is ready to accept a data byte.
  * @param None.
- * @retval true if UART2 transmitter FIFO has atleast 1 byte space
- * @retval false if UART2 transmitter FIFO is full
+ * @retval True -  The UART2 transmitter FIFO has at least a one byte space
+ * @retval False - The UART2 transmitter FIFO is full
  */
 bool UART2_IsTxReady(void);
 
 /**
  * @ingroup uart2
- * @brief This function return the status of transmit shift register (TSR).
+ * @brief Returns the status of the Transmit Shift Register (TSR).
  * @param None.
- * @retval true if Data completely shifted out from the TSR
- * @retval false if Data is present in Transmit FIFO and/or in TSR
+ * @retval True - Data completely shifted out from the TSR
+ * @retval False - Data is present in Transmit FIFO and/or in TSR
  */
 bool UART2_IsTxDone(void);
 
 /**
  * @ingroup uart2
- * @brief This function gets the error status of the last read byte.
- *        This function should be called before UART2_Read().
- * @pre RX should be enable by calling UART2_RxEnable() before calling this API.
+ * @brief Gets the error status of the last read byte. Call 
+ *        this function before calling UART2_Read().
+ * @pre Call UART2_RxEnable() to enable RX before calling this API.
  * @param None.
- * @return Status of the last read byte. See uart2_status_t struct for more details.
+ * @return Status of the last read byte. See the uart2_status_t struct for more details.
  */
 size_t UART2_ErrorGet(void);
 
 /**
  * @ingroup uart2
- * @brief This function reads the 8 bits from receiver FIFO register.
- * @pre The transfer status should be checked to see if the receiver is not empty
- *      before calling this function. UART2_IsRxReady() should be checked in if () before calling this API.
+ * @brief Reads the eight bits from the Receiver FIFO register.
+ * @pre Check the transfer status to see if the receiver is not empty before calling this function. Check 
+ *      UART2_IsRxReady() in if () before calling this API.
  * @param None.
- * @return 8-bit data from RX FIFO register.
+ * @return 8-bit data from the RX FIFO register
  */
 uint8_t UART2_Read(void);
 
 /**
  * @ingroup uart2
- * @brief This function writes a byte of data to the transmitter FIFO register.
- * @pre The transfer status should be checked to see if the transmitter is ready to accept a byte
- *      before calling this function. UART2_IsTxReady() should be checked in if() before calling this API.
- * @param txData  - Data byte to write to the TX FIFO.
+ * @brief Writes a byte of data to the Transmitter FIFO register.
+ * @pre Check the transfer status to see if the transmitter is not empty before calling this function. Check
+ *      UART2_IsTxReady() in if () before calling this API.
+ * @param txData  - Data byte to write to the TX FIFO
  * @return None.
  */
 void UART2_Write(uint8_t txData);
 
 /**
  * @ingroup uart2
- * @brief This API registers the function to be called upon UART2 framing error.
- * @param callbackHandler - a function pointer which will be called upon framing error condition.
+ * @brief Calls the function upon UART2 framing error.
+ * @param callbackHandler - Function pointer called when the framing error condition occurs
  * @return None.
  */
 void UART2_FramingErrorCallbackRegister(void (* callbackHandler)(void));
 
 /**
  * @ingroup uart2
- * @brief This API registers the function to be called upon UART2 overrun error.
- * @param callbackHandler - a function pointer which will be called upon overrun error condition.
+ * @brief Calls the function upon UART2 overrun error.
+ * @param callbackHandler - Function pointer called when the overrun error condition occurs
  * @return None.
  */
 void UART2_OverrunErrorCallbackRegister(void (* callbackHandler)(void));
 
 /**
  * @ingroup uart2
- * @brief This API registers the function to be called upon UART2 Parity error.
- * @param callbackHandler - a function pointer which will be called upon Parity error condition.
+ * @brief Calls the function upon UART2 parity error.
+ * @param callbackHandler - Function pointer called when the parity error condition occurs
  * @return None.
  */
 void UART2_ParityErrorCallbackRegister(void (* callbackHandler)(void));
+
 
 #ifdef __cplusplus  // Provide C++ Compatibility
 

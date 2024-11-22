@@ -5,13 +5,15 @@
  * 
  * @ingroup  tmr4
  * 
- * @brief API implementations for the TMR4 module.
+ * @brief Driver implementation for the TMR4 module.
  *
- * @version TMR4 Driver Version 3.0.1
+ * @version Driver Version 4.0.0
+ *
+ * @version Package Version 5.0.0
  */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -39,106 +41,126 @@
 #include "../tmr4.h"
 #include "../../system/interrupt.h"
 
-const struct TMR_INTERFACE Timer4 = {
-    .Initialize = Timer4_Initialize,
-    .Start = Timer4_Start,
-    .Stop = Timer4_Stop,
-    .PeriodCountSet = Timer4_PeriodCountSet,
-    .TimeoutCallbackRegister = Timer4_OverflowCallbackRegister,
-    .Tasks = NULL
-};
-
-static void (*Timer4_OverflowCallback)(void);
-static void Timer4_DefaultOverflowCallback(void);
+static void (*TMR4_PeriodMatchCallback)(void);
+static void TMR4_DefaultPeriodMatchCallback(void);
 
 /**
   Section: TMR4 APIs
 */
 
-void Timer4_Initialize(void){
+void TMR4_Initialize(void)
+{
+    T4CLKCON = (5 << _T4CLKCON_T4CS_POSN);  // T4CS MFINTOSC_500KHz
 
-    // Set TMR4 to the options selected in the User Interface
-    // TCS MFINTOSC_500KHz; 
-    T4CLKCON = 0x5;
-    // TMODE Software control; TCKSYNC Not Synchronized; TCKPOL Rising Edge; TPSYNC Not Synchronized; 
-    T4HLT = 0x0;
-    // TRSEL T4CKIPPS pin; 
-    T4RST = 0x0;
-    // PR 1; 
-    T4PR = 0x1;
-    // TMR 0x0; 
+    T4HLT = (0 << _T4HLT_T4MODE_POSN)   // T4MODE Software control
+        | (0 << _T4HLT_T4CKSYNC_POSN)   // T4CKSYNC Not Synchronized
+        | (0 << _T4HLT_T4CKPOL_POSN)   // T4CKPOL Rising Edge
+        | (0 << _T4HLT_T4PSYNC_POSN);  // T4PSYNC Not Synchronized
+
+    T4RST = (0 << _T4RST_T4RSEL_POSN);  // T4RSEL T4CKIPPS pin
+
+    T4PR = 0x1;    // Period 0.000128s; Frequency 15625Hz; Count 1
+
     T4TMR = 0x0;
 
-    // Set default overflow callback
-    Timer4_OverflowCallbackRegister(Timer4_DefaultOverflowCallback);
+    TMR4_PeriodMatchCallback = TMR4_DefaultPeriodMatchCallback;
+    
+    PIR10bits.TMR4IF = 0;   
+    PIE10bits.TMR4IE = 1;
 
-    // Clearing IF flag before enabling the interrupt.
-     PIR10bits.TMR4IF = 0;
-    // Enabling TMR4 interrupt.
-     PIE10bits.TMR4IE = 1;
-    // TCKPS 1:32; TMRON on; TOUTPS 1:1; 
-    T4CON = 0xD0;
+    T4CON = (5 << _T4CON_T4CKPS_POSN)   // T4CKPS 1:32
+        | (1 << _T4CON_TMR4ON_POSN)   // TMR4ON on
+        | (0 << _T4CON_T4OUTPS_POSN);  // T4OUTPS 1:1
 }
 
-void Timer4_ModeSet(Timer4_HLT_MODE mode)
+void TMR4_Deinitialize(void)
 {
-   // Configure different types HLT mode
-    T4HLTbits.T4MODE = mode;
+    T4CONbits.TMR4ON = 0;
+    
+    PIR10bits.TMR4IF = 0;	   
+    PIE10bits.TMR4IE = 0;		
+    
+    T4CON = 0x0;
+    T4CLKCON = 0x0;
+    T4HLT = 0x0;
+    T4RST = 0x0;
+    T4PR = 0xFF;
+    T4TMR =0x0;
 }
 
-void Timer4_ExtResetSourceSet(Timer4_HLT_EXT_RESET_SOURCE reset)
-{
-    //Configure different types of HLT external reset source
-    T4RSTbits.T4RSEL = reset;
-}
-
-void Timer4_Start(void)
-{
-    // Start the Timer by writing to TMRxON bit
+void TMR4_Start(void)
+{   
     T4CONbits.TMR4ON = 1;
 }
 
-void Timer4_Stop(void)
-{
-    // Stop the Timer by writing to TMRxON bit
+void TMR4_Stop(void)
+{   
     T4CONbits.TMR4ON = 0;
 }
 
-uint8_t Timer4_Read(void)
-{
-    uint8_t readVal;
-    readVal = TMR4;
-    return readVal;
+void TMR4_ModeSet(TMR4_HLT_MODE mode)
+{  
+    T4HLTbits.T4MODE = mode;
 }
 
-void Timer4_Write(uint8_t timerVal)
-{
-    // Write to the Timer4 register
-    TMR4 = timerVal;;
+void TMR4_ExtResetSourceSet(TMR4_HLT_EXT_RESET_SOURCE reset)
+{   
+    T4RSTbits.T4RSEL = reset;
 }
 
-void Timer4_PeriodCountSet(size_t periodVal)
+uint8_t TMR4_CounterGet(void)
 {
-   PR4 = (uint8_t) periodVal;
+    return T4TMR;
 }
 
-void __interrupt(irq(TMR4),base(8)) Timer4_ISR()
-{
-    // clear the TMR4 interrupt flag
-     PIR10bits.TMR4IF = 0;
+void TMR4_CounterSet(uint8_t count)
+{  
+    T4TMR = count;
+}
 
-    if(Timer4_OverflowCallback)
+void TMR4_PeriodSet(uint8_t periodVal)
+{
+    T4PR = periodVal;
+}
+
+uint8_t TMR4_PeriodGet(void)
+{
+    return T4PR;
+}
+
+uint8_t TMR4_MaxCountGet(void)
+{
+    return TMR4_MAX_COUNT;
+}
+
+void TMR4_TMRInterruptEnable(void)
+{
+    PIE10bits.TMR4IE = 1;
+}
+
+void TMR4_TMRInterruptDisable(void)
+{
+    PIE10bits.TMR4IE = 0;
+}
+
+void __interrupt(irq(TMR4),base(8)) TMR4_ISR(void)
+{
+    // The ticker is set to 1 -> The callback function gets called every time this ISR executes.
+    if(NULL != TMR4_PeriodMatchCallback)
     {
-        Timer4_OverflowCallback();
+        TMR4_PeriodMatchCallback();
     }
+   PIR10bits.TMR4IF = 0;
 }
 
-void Timer4_OverflowCallbackRegister(void (* InterruptHandler)(void)){
-    Timer4_OverflowCallback = InterruptHandler;
+void TMR4_PeriodMatchCallbackRegister(void (* callbackHandler)(void))
+{
+   TMR4_PeriodMatchCallback = callbackHandler;
 }
 
-static void Timer4_DefaultOverflowCallback(void){
-    // add your TMR4 interrupt custom code
-    // or set custom function using Timer4_OverflowCallbackRegister()
+static void TMR4_DefaultPeriodMatchCallback(void)
+{
+    // Default callback function
 }
+
 

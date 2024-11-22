@@ -11,7 +11,7 @@
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+© [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -72,7 +72,7 @@ int main(void)
     CLC2_CLCI_SetInterruptHandler(&Oscilloscope_changeWaveform);
     
     //Configures the timer to update the waveform
-    Timer4_OverflowCallbackRegister(&Oscilloscope_updateWaveform);
+    TMR4_PeriodMatchCallbackRegister(&Oscilloscope_updateWaveform);
 #else
     OPA1_SetPositiveChannel(OPA1_posChannel_OPA1IN);
     
@@ -81,13 +81,14 @@ int main(void)
 #endif
     
     //Configure Clipping Detector
-    ADC_SetADIInterruptHandler(&LED_updateState);
+    ADC_ConversionDoneCallbackRegister(&LED_updateState);
     
     //Set upper threshold (90% of max)
-    ADC_SetUpperThreshold(ADC_THRESHOLD_LEVEL);
+    ADC_UpperThresholdSet(ADC_THRESHOLD_LEVEL);
     
     //Start ADC Conversion on the output of OPAMP when sampling OPA1IN3+
-    ADC_StartConversionOnChannel(channel_ANA1);
+    ADC_ChannelSelect(ADC_CHANNEL_ANA1);
+    ADC_ConversionStart();
     
     //Assign UART TX Priority
     DMA1_SetDMAPriority(1);
